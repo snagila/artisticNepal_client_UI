@@ -1,9 +1,16 @@
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
+import HomePage from "./pages/homepage/HomePage";
 
 function App() {
-  const [count, setCount] = useState(0);
-
-  return;
+  return (
+    <>
+      <Routes>
+        {/* PUBLIC ROUTES */}
+        <Route path="/" element={<HomePage />}></Route>
+      </Routes>
+    </>
+  );
 }
 
 export default App;
