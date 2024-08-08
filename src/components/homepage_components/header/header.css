@@ -1,0 +1,12 @@
+.header {
+  height: 15vh;
+  /* this is blue shade */
+  background: #a7c7e7;
+  /* this is apple white background color */
+  /* background: #f5f5f7; */
+  /* background: black; */
+  /* color: whitesmoke; */
+}
+#menu {
+  margin-top: 2px;
+}

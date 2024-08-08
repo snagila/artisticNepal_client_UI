@@ -5,14 +5,13 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { FaRegUser } from "react-icons/fa";
 import { FaShoppingCart } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
-import logo from "../../assets/logo.png";
 
 const Header = () => {
   return (
     <>
-      <Row className="bg-primary header d-flex align-items-center justify-content-between fs-5">
-        <Col className="ms-5 ">
-          <Stack direction="horizontal" gap={2} className="fs-3">
+      <Row className=" header  d-flex align-items-center justify-content-center">
+        <Col className="ms-5 d-flex align-items-center justify-content-between">
+          <Stack direction="horizontal" gap={2} className="fs-4">
             <div>
               <GiHamburgerMenu />
             </div>
@@ -20,24 +19,24 @@ const Header = () => {
           </Stack>
         </Col>
 
-        <Col className="d-flex align-items-center justify-content-center flex-column">
-          <img src={logo} width={100} height={80} alt="" />
+        <Col className=" fw-bold fs-3 ">
+          <div>Artistic Nepal</div>
         </Col>
 
-        <Col className="text-center d-flex  align-items-center justify-content-center ">
-          <Stack className="text-center  align-items-center justify-content-center">
+        <Col className="d-flex align-items-center justify-content-center ">
+          <Stack className="align-items-center justify-content-center">
             <div>
               <FaHeart />
             </div>
             <div>WishList</div>
           </Stack>
-          <Stack>
+          <Stack className="align-items-center justify-content-center">
             <div>
               <FaRegUser />
             </div>
             <div>Account</div>
           </Stack>
-          <Stack>
+          <Stack className="align-items-center justify-content-center">
             <div>
               <FaShoppingCart />
             </div>
