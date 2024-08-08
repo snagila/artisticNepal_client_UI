@@ -1,0 +1,7 @@
+:root {
+  --page-color: whitesmoke;
+  --body-color: #cbcbcd82;
+}
+body {
+  background: var(--page-color);
+}

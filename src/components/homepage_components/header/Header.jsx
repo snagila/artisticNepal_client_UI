@@ -9,38 +9,32 @@ import { FaHeart } from "react-icons/fa";
 const Header = () => {
   return (
     <>
-      <Row className=" header  d-flex align-items-center justify-content-center">
-        <Col className="ms-5 d-flex align-items-center justify-content-between">
-          <Stack direction="horizontal" gap={2} className="fs-4">
-            <div>
-              <GiHamburgerMenu />
-            </div>
-            <div id="menu">Menu</div>
-          </Stack>
-        </Col>
-
-        <Col className=" fw-bold fs-3 ">
+      <Row className=" header  m-auto d-flex align-items-center justify-content-center p-3">
+        <Col className=" fw-bold fs-3 d-flex flex-nowrap">
           <div>Artistic Nepal</div>
         </Col>
+        <Col className="ms-5 d-flex align-items-center justify-content-between"></Col>
 
-        <Col className="d-flex align-items-center justify-content-center ">
+        <Col className="d-flex align-items-center justify-content-evenly gap-2">
           <Stack className="align-items-center justify-content-center">
             <div>
               <FaHeart />
             </div>
-            <div>WishList</div>
           </Stack>
           <Stack className="align-items-center justify-content-center">
             <div>
               <FaRegUser />
             </div>
-            <div>Account</div>
           </Stack>
           <Stack className="align-items-center justify-content-center">
             <div>
               <FaShoppingCart />
             </div>
-            <div>Cart</div>
+          </Stack>
+          <Stack direction="horizontal" gap={2} className="">
+            <div className="fs-4">
+              <GiHamburgerMenu />
+            </div>
           </Stack>
         </Col>
       </Row>

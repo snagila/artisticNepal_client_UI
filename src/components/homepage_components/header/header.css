@@ -1,9 +1,12 @@
+.headerDiv {
+  background: var(--body-color);
+}
 .header {
-  height: 15vh;
+  height: 10vh;
   /* this is blue shade */
-  background: #a7c7e7;
+  /* background: #a7c7e7; */
   /* this is apple white background color */
-  /* background: #f5f5f7; */
+  background: var(--body-color);
   /* background: black; */
   /* color: whitesmoke; */
 }
