@@ -5,3 +5,8 @@
 body {
   background: var(--page-color);
 }
+
+.withoutLink {
+  text-decoration: none;
+  color: inherit;
+}

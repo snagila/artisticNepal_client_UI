@@ -21,6 +21,9 @@ const Description = () => {
             to thrive, balancing its ancient heritage with contemporary
             innovation.
           </span>
+          <span style={{ borderBottom: "1px solid red", color: "red" }}>
+            DISCOVER
+          </span>
         </div>
       </div>
     </>
