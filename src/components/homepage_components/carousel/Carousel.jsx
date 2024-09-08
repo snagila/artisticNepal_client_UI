@@ -2,46 +2,33 @@ import Carousel from "react-bootstrap/Carousel";
 import pic1 from "../../../assets/carousel_pics/1.jpeg";
 import pic2 from "../../../assets/carousel_pics/2.jpg";
 import pic3 from "../../../assets/carousel_pics/3.jpeg";
+import { Button } from "react-bootstrap";
 
-const CustomCarousel = () => {
+const CustomCarousel = ({ categories }) => {
+  console.log(categories);
   return (
     <Carousel fade style={{ height: "60vh" }}>
-      <Carousel.Item>
-        <img
-          src={pic1}
-          className="d-block w-100"
-          alt=""
-          style={{ height: "60vh" }}
-        />
-        <Carousel.Caption>
-          <h3>First slide label</h3>
-          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-        </Carousel.Caption>
-      </Carousel.Item>
-      <Carousel.Item>
-        <img
-          src={pic2}
-          className="d-block w-100"
-          alt=""
-          style={{ height: "60vh", objectFit: "cover" }}
-        />
-        <Carousel.Caption>
-          <h3>Second slide label</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        </Carousel.Caption>
-      </Carousel.Item>
-      <Carousel.Item>
-        <img
-          src={pic3}
-          className="d-block w-100"
-          alt=""
-          style={{ height: "60vh", objectFit: "cover" }}
-        />
-        <Carousel.Caption>
-          <h3>Second slide label</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        </Carousel.Caption>
-      </Carousel.Item>
+      {categories.map((item, index) => (
+        <Carousel.Item key={item._id}>
+          <img
+            src={item.categoryThumbnail}
+            className="d-block w-100"
+            alt=""
+            style={{ height: "60vh", objectFit: "cover" }}
+          />
+          <Carousel.Caption
+            style={{
+              boxShadow: "0 4px 8px rgba(0, 0, 0, 0.6)", // Shadow for contrast
+              backgroundColor: "rgba(0, 0, 0, 0.5)", // Optional: Semi-transparent background
+              padding: "1rem", // Optional: Padding for spacing
+              borderRadius: "8px", // Optional: Rounded corners
+            }}
+          >
+            <h3>{item.category}</h3>
+            <Button variant="outline-light">Browse {item.category}</Button>
+          </Carousel.Caption>
+        </Carousel.Item>
+      ))}
     </Carousel>
   );
 };
