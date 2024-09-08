@@ -3,5 +3,10 @@
 }
 
 .custom-offcanvas-homepage {
-  background: whitesmoke;
+  background: rgb(245, 239, 232);
+  color: black;
+}
+
+.hamBurgerOffcanvas {
+  background-color: rgb(255, 252, 246) !important;
 }

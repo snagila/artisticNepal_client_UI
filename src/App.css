@@ -1,12 +1,7 @@
-:root {
-  --page-color: whitesmoke;
-  --body-color: #cbcbcd82;
-}
-body {
-  background: var(--page-color);
-}
-
 .withoutLink {
   text-decoration: none;
   color: inherit;
+}
+body {
+  background-color: rgb(245, 239, 232);
 }

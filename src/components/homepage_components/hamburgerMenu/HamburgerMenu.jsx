@@ -1,14 +1,20 @@
 import { Stack } from "react-bootstrap";
 import "./hamBurgerMenu.css";
 import Offcanvas from "react-bootstrap/Offcanvas";
-import { GoPlus } from "react-icons/go";
 import { FaPhoneAlt } from "react-icons/fa";
 import { BsPersonFill } from "react-icons/bs";
-import Painting_Categories from "./Painting_Categories";
-import WoodCarvings_Categories from "./WoodCarvings_Categories";
-import PrayersandMeditaion_Categories from "./PrayersandMeditaion_Categories";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { getAllCategories } from "../../../axios/categoryAxios";
 
 function HamburgerMenu({ show, handleClose }) {
+  const { products } = useSelector((state) => state.product);
+  const { categories } = useSelector((state) => state.category);
+
+  useEffect(() => {
+    getAllCategories();
+  }, [show]);
   return (
     <>
       <Offcanvas
@@ -16,22 +22,31 @@ function HamburgerMenu({ show, handleClose }) {
         onHide={handleClose}
         placement="end"
         keyboard={true}
+        className="hamBurgerOffcanvas"
       >
         <div className=" h-75">
-          <Offcanvas.Header closeButton className="text-center">
+          <Offcanvas.Header
+            closeButton
+            closeVariant="red"
+            className="text-center"
+          >
             <Offcanvas.Title>Categories</Offcanvas.Title>
           </Offcanvas.Header>
           <div className="container">
             <hr />
           </div>
           <Stack gap={2} className="menuHamburger ">
-            <Painting_Categories />
-            <WoodCarvings_Categories />
-            <PrayersandMeditaion_Categories />
-
-            <Offcanvas.Title className="fw-light fs-4">
-              Khukuris
-            </Offcanvas.Title>
+            {categories?.map((category) => (
+              <Link
+                to={`/product/${category.category}`}
+                className="withoutLink"
+                key={category._id}
+              >
+                <Offcanvas.Title className="fw-bold fs-4 ms-2">
+                  {category.category}
+                </Offcanvas.Title>
+              </Link>
+            ))}
           </Stack>
         </div>
         <div className="custom-offcanvas-homepage h-25">

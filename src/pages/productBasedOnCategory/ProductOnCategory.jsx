@@ -1,0 +1,74 @@
+import React from "react";
+import "./productOnCategory.css";
+import Header from "../../components/homepage_components/header/Header";
+import { Card, Col, Container, Form, Row } from "react-bootstrap";
+import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import ProductOnCategorySwiper from "../../components/productOnCategorySwiper/ProductOnCategorySwiper";
+
+const ProductOnCategory = () => {
+  const { id } = useParams();
+  const { categories } = useSelector((state) => state.category);
+  const { products } = useSelector((state) => state.product);
+  const productCategory = categories?.find(
+    (category) => category.category === id
+  );
+  const sameCategoryProduct = products?.filter(
+    (product) => product.category === id
+  );
+
+  return (
+    <>
+      <Header />
+
+      <Row className=" ">
+        <div className="p-1 " style={{ backgroundColor: "rgb(255, 252, 246)" }}>
+          <Container>
+            <Row className="w-100">
+              <Col>
+                <span className="fs-4 fw-bold">
+                  {productCategory?.category}
+                </span>{" "}
+                &nbsp; ({sameCategoryProduct.length} products found)
+              </Col>
+              <Col className="d-flex justify-content-end ">
+                <Form.Select className="  w-25 ">
+                  <option>Filter Product</option>
+                  <option>Newest</option>
+                  <option>Price (Low - High)</option>
+                  <option>Price(High -Low)</option>
+                  {/* Add more options here */}
+                </Form.Select>
+              </Col>
+            </Row>
+          </Container>
+        </div>
+        <div>
+          <Container>
+            <Row className="">
+              {sameCategoryProduct?.map((product) => (
+                <Col className="mt-3 d-flex align-items-center justify-content-center col">
+                  <Card
+                    style={{
+                      width: "18rem",
+                      backgroundColor: "rgb(245,239,232)",
+                      border: "none",
+                    }}
+                  >
+                    <ProductOnCategorySwiper product={product} />
+                    <Card.Body>
+                      <Card.Title>{product.name}</Card.Title>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              ))}
+            </Row>
+          </Container>
+        </div>
+      </Row>
+      {/* </Container> */}
+    </>
+  );
+};
+
+export default ProductOnCategory;

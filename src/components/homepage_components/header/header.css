@@ -1,16 +1,8 @@
-.headerDiv {
-  background: var(--body-color);
-}
 .header {
-  height: 10vh;
-  /* this is blue shade */
-  /* background: #a7c7e7; */
-  /* this is apple white background color */
-  background: var(--body-color);
-  /* position: sticky; */
-  /* background: black; */
-  /* color: whitesmoke; */
-}
-#menu {
-  margin-top: 2px;
+  height: 8vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgba(245, 239, 232);
+  /* color: whitesmoke;  */
 }
