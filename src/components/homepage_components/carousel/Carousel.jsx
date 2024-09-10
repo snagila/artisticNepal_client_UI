@@ -14,7 +14,12 @@ const CustomCarousel = ({ categories }) => {
             src={item.categoryThumbnail}
             className="d-block w-100"
             alt=""
-            style={{ height: "60vh", objectFit: "cover" }}
+            style={{
+              height: "60vh",
+              inlineSize: "100%",
+              // aspectRatio: "16/9",
+              // objectFit: "fill",
+            }}
           />
           <Carousel.Caption
             style={{

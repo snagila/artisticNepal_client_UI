@@ -16,6 +16,17 @@ const ProductOnCategory = () => {
   const sameCategoryProduct = products?.filter(
     (product) => product.category === id
   );
+  // const gridArea = {
+  //   container: {
+  //     display: "grid",
+  //     gridTemplateRows: "320px auto",
+  //     gridTemplateColumns: "1fr 1fr 1fr 1fr",
+  //     gap: "10px",
+  //   },
+  //   container1:{
+
+  //   }
+  // };
 
   return (
     <>
@@ -24,7 +35,7 @@ const ProductOnCategory = () => {
       <Row className=" ">
         <div className="p-1 " style={{ backgroundColor: "rgb(255, 252, 246)" }}>
           <Container>
-            <Row className="w-100">
+            <Row className="">
               <Col>
                 <span className="fs-4 fw-bold">
                   {productCategory?.category}
@@ -47,7 +58,7 @@ const ProductOnCategory = () => {
           <Container>
             <Row className="">
               {sameCategoryProduct?.map((product) => (
-                <Col className="mt-3 d-flex align-items-center justify-content-center col">
+                <Col className="mt-3 d-flex align-items-center justify-content-center ">
                   <Card
                     style={{
                       width: "18rem",

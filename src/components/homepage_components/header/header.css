@@ -1,8 +1,10 @@
 .header {
-  height: 8vh;
+  /* height: 12vh; */
   display: flex;
   align-items: center;
   justify-content: space-between;
   background-color: rgba(245, 239, 232);
-  /* color: whitesmoke;  */
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./header.css";
 import { Col, Row } from "react-bootstrap";
 import { GiHamburgerMenu } from "react-icons/gi";
@@ -10,13 +10,32 @@ import { useState } from "react";
 import HamburgerMenu from "../hamburgerMenu/HamburgerMenu";
 
 const Header = ({ categories }) => {
-  // state to control the hamburger menu
+  const [headerHeight, setHeaderHeight] = useState("12vh");
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setHeaderHeight("5vh");
+      } else {
+        setHeaderHeight("12vh");
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
   return (
     <>
-      <Row className=" header  overflow-x-hidden ">
+      <Row
+        className=" header  overflow-x-hidden "
+        style={{ height: headerHeight, transition: "height 0.3s ease" }}
+      >
         <Col className="d-flex align-items-center fw-bold fs-3 ms-4">
           <Link to="/" className="withoutLink">
             {" "}
