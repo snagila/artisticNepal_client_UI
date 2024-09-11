@@ -1,10 +1,11 @@
 import React from "react";
 import "./productOnCategory.css";
 import Header from "../../components/homepage_components/header/Header";
+
 import { Card, Col, Container, Form, Row } from "react-bootstrap";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-import ProductOnCategorySwiper from "../../components/productOnCategorySwiper/ProductOnCategorySwiper";
+import ProductSwiper from "../../components/productOnCategorySwiper/ProductSwiper";
 
 const ProductOnCategory = () => {
   const { id } = useParams();
@@ -58,7 +59,10 @@ const ProductOnCategory = () => {
           <Container>
             <Row className="">
               {sameCategoryProduct?.map((product) => (
-                <Col className="mt-3 d-flex align-items-center justify-content-center ">
+                <Col
+                  className="mt-3 d-flex align-items-center justify-content-center "
+                  key={product._id}
+                >
                   <Card
                     style={{
                       width: "18rem",
@@ -66,7 +70,13 @@ const ProductOnCategory = () => {
                       border: "none",
                     }}
                   >
-                    <ProductOnCategorySwiper product={product} />
+                    <Link to={`/products/product/${product.sku}`}>
+                      <ProductSwiper
+                        images={[...product.thumbnail, ...product.images]}
+                        swiperFrom={"productOnCategory"}
+                      />
+                    </Link>
+
                     <Card.Body>
                       <Card.Title>{product.name}</Card.Title>
                     </Card.Body>

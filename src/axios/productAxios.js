@@ -13,3 +13,13 @@ export const getProducts = async () => {
     return error.message;
   }
 };
+
+export const getAProductAxios = async (productSKU) => {
+  try {
+    const response = await axios.get(`${PRODUCT_BASE_URL}/${productSKU}`);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    return error.message;
+  }
+};

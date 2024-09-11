@@ -4,6 +4,7 @@ import HomePage from "./pages/homepage/HomePage";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ProductOnCategory from "./pages/productBasedOnCategory/ProductOnCategory";
+import ProductPage from "./pages/productPage/ProductPage";
 
 function App() {
   return (
@@ -11,7 +12,8 @@ function App() {
       <Routes>
         {/* PUBLIC ROUTES */}
         <Route path="/" element={<HomePage />} />
-        <Route path="/product/:id" element={<ProductOnCategory />} />
+        <Route path="/products/:id" element={<ProductOnCategory />} />
+        <Route path="/products/product/:id" element={<ProductPage />} />
       </Routes>
       <ToastContainer />
     </>

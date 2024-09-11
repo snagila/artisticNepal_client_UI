@@ -1,24 +1,26 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, EffectFade } from "swiper/modules";
+import { Navigation, EffectFade, Pagination } from "swiper/modules";
 import "swiper/css/bundle";
 import "./productSwiper.css";
 import "swiper/css/effect-fade";
 
-const ProductOnCategorySwiper = ({ product }) => {
+const ProductSwiper = ({ images }) => {
+  console.log(images);
   return (
     <Swiper
       direction="horizontal"
       loop={true}
       effect={"fade"}
+      pagination={{ clickable: true }}
       navigation={{
         nextEl: ".swiper-button-next",
         prevEl: ".swiper-button-prev",
       }}
-      modules={[Navigation, EffectFade]}
-      className="mySwiper"
+      modules={[Navigation, EffectFade, Pagination]}
+      className="productpage"
     >
-      {[...product.thumbnail, ...product.images].map((image, i) => (
+      {images?.map((image, i) => (
         <SwiperSlide key={i}>
           <img src={image} alt={`Product Image ${i + 1}`} />
         </SwiperSlide>
@@ -30,4 +32,4 @@ const ProductOnCategorySwiper = ({ product }) => {
   );
 };
 
-export default ProductOnCategorySwiper;
+export default ProductSwiper;

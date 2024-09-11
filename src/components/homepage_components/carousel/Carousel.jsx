@@ -1,14 +1,10 @@
 import Carousel from "react-bootstrap/Carousel";
-import pic1 from "../../../assets/carousel_pics/1.jpeg";
-import pic2 from "../../../assets/carousel_pics/2.jpg";
-import pic3 from "../../../assets/carousel_pics/3.jpeg";
 import { Button } from "react-bootstrap";
 
 const CustomCarousel = ({ categories }) => {
-  console.log(categories);
   return (
     <Carousel fade style={{ height: "60vh" }}>
-      {categories.map((item, index) => (
+      {categories.map((item) => (
         <Carousel.Item key={item._id}>
           <img
             src={item.categoryThumbnail}
@@ -17,16 +13,14 @@ const CustomCarousel = ({ categories }) => {
             style={{
               height: "60vh",
               inlineSize: "100%",
-              // aspectRatio: "16/9",
-              // objectFit: "fill",
             }}
           />
           <Carousel.Caption
             style={{
-              boxShadow: "0 4px 8px rgba(0, 0, 0, 0.6)", // Shadow for contrast
-              backgroundColor: "rgba(0, 0, 0, 0.5)", // Optional: Semi-transparent background
-              padding: "1rem", // Optional: Padding for spacing
-              borderRadius: "8px", // Optional: Rounded corners
+              boxShadow: "0 4px 8px rgba(0, 0, 0, 0.6)",
+              backgroundColor: "rgba(0, 0, 0, 0.5)",
+              padding: "1rem",
+              borderRadius: "8px",
             }}
           >
             <h3>{item.category}</h3>

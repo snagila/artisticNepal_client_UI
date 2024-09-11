@@ -25,11 +25,7 @@ function HamburgerMenu({ show, handleClose }) {
         className="hamBurgerOffcanvas"
       >
         <div className=" h-75">
-          <Offcanvas.Header
-            closeButton
-            closeVariant="red"
-            className="text-center"
-          >
+          <Offcanvas.Header closeButton className="text-center">
             <Offcanvas.Title>Categories</Offcanvas.Title>
           </Offcanvas.Header>
           <div className="container">
@@ -38,7 +34,7 @@ function HamburgerMenu({ show, handleClose }) {
           <Stack gap={2} className="menuHamburger ">
             {categories?.map((category) => (
               <Link
-                to={`/product/${category.category}`}
+                to={`/products/${category.category}`}
                 className="withoutLink"
                 key={category._id}
               >
