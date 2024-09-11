@@ -1,5 +1,6 @@
 import Carousel from "react-bootstrap/Carousel";
 import { Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const CustomCarousel = ({ categories }) => {
   return (
@@ -13,6 +14,7 @@ const CustomCarousel = ({ categories }) => {
             style={{
               height: "60vh",
               inlineSize: "100%",
+              objectFit: "cover",
             }}
           />
           <Carousel.Caption
@@ -24,7 +26,9 @@ const CustomCarousel = ({ categories }) => {
             }}
           >
             <h3>{item.category}</h3>
-            <Button variant="outline-light">Browse {item.category}</Button>
+            <Link to={`/products/${item.category}`}>
+              <Button variant="outline-light">Browse {item.category}</Button>
+            </Link>
           </Carousel.Caption>
         </Carousel.Item>
       ))}

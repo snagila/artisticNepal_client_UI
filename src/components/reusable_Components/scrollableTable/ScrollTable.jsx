@@ -1,25 +1,39 @@
 import React from "react";
 import "./scrollTable.css";
-import { Card, Col, Row } from "react-bootstrap";
+import { Button, Card, Col, Image, Row } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
-const ScrollTable = ({ products, categories }) => {
-  //   const isOlderThanOneYear = (dateFromDb) => {
-  //     const currentDate = new Date();
-  //     const oneYearAgo = new Date();
-  //     oneYearAgo.setFullYear(currentDate.getFullYear() - 1);
+const ScrollTable = ({ similarCategoryProducts }) => {
+  return (
+    <>
+      <Row>
+        <h3 className=" p-2 " style={{}}>
+          Similar Products
+        </h3>
 
-  //     // Convert date from DB to a Date object if necessary
-  //     const dbDate = new Date(dateFromDb);
-  //     console.log(dbDate);
+        <Col>
+          <div className="table snaps-inline ">
+            {similarCategoryProducts?.map((item, i) => (
+              <Card key={item._id} className="card-main-body">
+                <Card.Img
+                  src={item?.thumbnail.map((image) => image)}
+                  className="main-img"
+                />
 
-  //     // Check if the date from DB is older than one month ago
-  //     return dbDate < oneYearAgo;
-  //   };
-  //   const newAdditionTable = products.filter(
-  //     (item, index) => item.createdAt !== isOlderThanOneMonth(item.createdAt)
-  //   );
-  //   console.log(newAdditionTable);
-  return <>hello</>;
+                <Card.Title className="p-1 ms-1">{item.name}</Card.Title>
+                <Link
+                  to={`/products/product/${item.sku}`}
+                  className="withoutLink  "
+                >
+                  <Button className="w-100">View</Button>
+                </Link>
+              </Card>
+            ))}
+          </div>
+        </Col>
+      </Row>
+    </>
+  );
 };
 
 export default ScrollTable;

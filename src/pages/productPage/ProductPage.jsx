@@ -6,34 +6,39 @@ import { useDispatch, useSelector } from "react-redux";
 import Header from "../../components/homepage_components/header/Header";
 import { Button, Col, Container, Form, Image, Row } from "react-bootstrap";
 import { FaHeart } from "react-icons/fa";
+import ScrollTable from "../../components/reusable_Components/scrollableTable/ScrollTable";
 
 const ProductPage = () => {
   const [productPicDisplay, setProductPicDisplay] = useState("");
+
   const selectQuantity = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   const dispatch = useDispatch();
-  const { product } = useSelector((state) => state.product);
+  const { product, products } = useSelector((state) => state.product);
 
-  const [productDescription, setProductDescription] = useState(
-    product.description.slice(0, 400)
-  );
+  const [productDescription, setProductDescription] = useState("");
   const { id } = useParams();
+
+  const similarCategoryProducts = products
+    ?.filter((item) => item.category === product.category)
+    .filter((item) => item._id !== product._id);
+
   const allImages = product.thumbnail
     ?.map((picture) => picture)
     .concat(product.images?.map((images) => images));
 
-  const showFullDescription = () => {};
   useEffect(() => {
     dispatch(getAProductAction(id));
   }, [id]);
   useEffect(() => {
     if (product?.thumbnail) {
       setProductPicDisplay(product.thumbnail?.map((picture) => picture));
+      setProductDescription(product.description?.slice(0, 400));
     }
   }, [product]);
   return (
     <>
       <Header />
-      <Container className="m-auto" fluid>
+      <Container>
         <Row className="productPageRow1">
           <Col className=" productPageCol1" xs={12} md={1}>
             <Col xs={12} className="sidePicturesDiv">
@@ -54,11 +59,16 @@ const ProductPage = () => {
               ))}
             </Col>
           </Col>
-          <Col className="mainProductImageCol " xs={12} md={5}>
-            <Image src={productPicDisplay} />
+
+          <Col className="mainProductImageCol " xs={12} md={6}>
+            <Image
+              src={productPicDisplay}
+              style={{ height: "100%", width: "100%" }}
+            />
           </Col>
-          <Col className="productDescriptionCol" xs={12} md={6}>
-            <Row className="">
+
+          <Col className="productDescriptionCol " xs={12} md={5}>
+            <Row className="gap-4 p-2">
               <Row className="productName-row">
                 <h3 className="p-0">{product.name}</h3>
               </Row>
@@ -91,30 +101,23 @@ const ProductPage = () => {
                 <Col className="p-0 ps-1">
                   {" "}
                   <Button variant="outline-danger" size="md">
-                    {" "}
                     <FaHeart />
                   </Button>
                 </Col>
               </Row>
-
-              {/* <Row>
-                <div className=" p-0"> Overview</div>
-                {product.description}
-                <Button>Read more</Button>
-              </Row> */}
             </Row>
           </Col>
         </Row>
 
-        <Row className="pt-5 productDescriptionRow">
+        <Row className=" productDescriptionRow">
           <span className="">Description:</span>
           <span>
-            {productDescription}...
-            {productDescription.length > 400 ? (
+            {productDescription}
+            {productDescription?.length > 400 ? (
               <button
                 className="product-readmore-button"
                 onClick={() =>
-                  setProductDescription(product.description.slice(0, 400))
+                  setProductDescription(product?.description.slice(0, 400))
                 }
               >
                 Read Less..
@@ -128,6 +131,9 @@ const ProductPage = () => {
               </button>
             )}
           </span>
+        </Row>
+        <Row className="mt-4">
+          <ScrollTable similarCategoryProducts={similarCategoryProducts} />
         </Row>
       </Container>
     </>

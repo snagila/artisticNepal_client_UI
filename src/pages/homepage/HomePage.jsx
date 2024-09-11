@@ -27,9 +27,7 @@ const HomePage = () => {
       <Header categories={categories} />
       <CustomCarousel categories={categories} />
       <Description />
-      <Container>
-        <ScrollTable products={products} categories={categories} />
-      </Container>
+      <Container></Container>
     </>
   );
 };

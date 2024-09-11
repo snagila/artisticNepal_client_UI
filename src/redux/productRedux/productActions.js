@@ -21,7 +21,6 @@ export const getAProductAction = (productSKU) => async (dispatch) => {
   if (result.status === "error") {
     return toast.error("Sorry product not found");
   } else {
-    console.log(result.data);
     dispatch(setProduct(result.data));
     return;
   }

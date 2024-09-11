@@ -9,6 +9,7 @@ import ProductSwiper from "../../components/productOnCategorySwiper/ProductSwipe
 
 const ProductOnCategory = () => {
   const { id } = useParams();
+
   const { categories } = useSelector((state) => state.category);
   const { products } = useSelector((state) => state.product);
   const productCategory = categories?.find(
@@ -17,17 +18,6 @@ const ProductOnCategory = () => {
   const sameCategoryProduct = products?.filter(
     (product) => product.category === id
   );
-  // const gridArea = {
-  //   container: {
-  //     display: "grid",
-  //     gridTemplateRows: "320px auto",
-  //     gridTemplateColumns: "1fr 1fr 1fr 1fr",
-  //     gap: "10px",
-  //   },
-  //   container1:{
-
-  //   }
-  // };
 
   return (
     <>

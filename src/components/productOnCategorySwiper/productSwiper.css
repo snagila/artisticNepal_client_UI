@@ -1,12 +1,12 @@
 .mySwiper {
-  height: 20rem;
+  height: 20rem !important;
   width: 18rem !important;
 }
 
-img {
+.swiperimage {
   display: block;
-  width: 100%;
-  height: 100%;
+  height: 20rem !important;
+  width: 18rem !important;
   object-fit: cover;
   border-radius: 6px;
 }

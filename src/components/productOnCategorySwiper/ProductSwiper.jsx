@@ -6,23 +6,25 @@ import "./productSwiper.css";
 import "swiper/css/effect-fade";
 
 const ProductSwiper = ({ images }) => {
-  console.log(images);
   return (
     <Swiper
       direction="horizontal"
       loop={true}
       effect={"fade"}
-      pagination={{ clickable: true }}
       navigation={{
         nextEl: ".swiper-button-next",
         prevEl: ".swiper-button-prev",
       }}
-      modules={[Navigation, EffectFade, Pagination]}
+      modules={[Navigation, EffectFade]}
       className="productpage"
     >
       {images?.map((image, i) => (
         <SwiperSlide key={i}>
-          <img src={image} alt={`Product Image ${i + 1}`} />
+          <img
+            src={image}
+            alt={`Product Image ${i + 1}`}
+            className="swiperimage"
+          />
         </SwiperSlide>
       ))}
 
