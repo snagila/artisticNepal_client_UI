@@ -1,0 +1,65 @@
+#authlayoutRow {
+  height: 100vh;
+}
+.authlayoutCol1 {
+  z-index: 101;
+  background-color: #fffcf6;
+  color: goldenrod;
+  position: relative;
+}
+
+#authlayoutCol1title1 {
+  position: absolute;
+  top: 50%;
+  left: 40%;
+  transform: translateY(-50%);
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  font-size: 4rem;
+  font-weight: bold;
+  white-space: nowrap;
+}
+#authlayoutCol1title2 {
+  position: absolute;
+  top: 50%;
+  left: 60%;
+  transform: translateY(-50%);
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  font-size: 4rem;
+  font-weight: bold;
+  white-space: nowrap;
+}
+#authlayoutCol2 {
+  background: #f5efe8;
+}
+
+@media (max-width: 768px) {
+  .authlayoutCol1 {
+    display: none;
+  }
+
+  /* #authlayoutCol1title1 {
+    position: absolute;
+    top: 20%;
+    left: 30%;
+    writing-mode: horizontal-tb;
+    text-orientation: upright;
+    font-size: 2rem;
+    font-weight: bold;
+    white-space: nowrap;
+  }
+  #authlayoutCol1title2 {
+    position: absolute;
+    top: 60%;
+    left: 35%;
+    writing-mode: horizontal-tb;
+    text-orientation: upright;
+    font-size: 2rem;
+    font-weight: bold;
+    white-space: nowrap;
+  } */
+  #authlayoutCol2 {
+    height: 100vh;
+  }
+}

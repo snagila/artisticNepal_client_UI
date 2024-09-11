@@ -17,7 +17,7 @@ const Header = ({ categories }) => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50) {
+      if (window.scrollY > 30) {
         setHeaderHeight("5vh");
       } else {
         setHeaderHeight("12vh");
@@ -45,7 +45,10 @@ const Header = ({ categories }) => {
 
         <Col className="d-flex align-items-center justify-content-evenly gap-2">
           <FaHeart />
-          <FaRegUser />
+          <Link to={`user/login`} className="withoutLink">
+            <FaRegUser />
+          </Link>
+
           <FaShoppingCart />
           <GiHamburgerMenu onClick={handleShow} />
           <HamburgerMenu

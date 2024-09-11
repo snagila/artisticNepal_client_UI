@@ -14,8 +14,6 @@ const HomePage = () => {
   const dispatch = useDispatch();
   const { categories } = useSelector((state) => state.category);
   const { products } = useSelector((state) => state.product);
-  // console.log(products);
-  // console.log(categories);
 
   useEffect(() => {
     dispatch(getCategoriesAction());

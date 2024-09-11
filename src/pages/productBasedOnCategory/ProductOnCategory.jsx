@@ -1,7 +1,5 @@
 import React from "react";
-import "./productOnCategory.css";
 import Header from "../../components/homepage_components/header/Header";
-
 import { Card, Col, Container, Form, Row } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";

@@ -1,0 +1,14 @@
+.authFormCentering {
+  height: 87vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 500px) {
+  .authFormCentering {
+    height: 50vh;
+    margin: none;
+  }
+}
