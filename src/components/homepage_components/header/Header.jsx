@@ -2,14 +2,16 @@ import React, { useEffect } from "react";
 import "./header.css";
 import { Col, Row } from "react-bootstrap";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { FaRegUser } from "react-icons/fa";
+import { FaRegUser, FaUserCheck } from "react-icons/fa";
 import { FaShoppingCart } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import HamburgerMenu from "../hamburgerMenu/HamburgerMenu";
+import { useSelector } from "react-redux";
 
 const Header = ({ categories }) => {
+  const { user } = useSelector((state) => state.user);
   const [headerHeight, setHeaderHeight] = useState("12vh");
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -33,7 +35,7 @@ const Header = ({ categories }) => {
   return (
     <>
       <Row
-        className=" header  overflow-x-hidden "
+        className=" header  overflow-x-hidden shadow"
         style={{ height: headerHeight, transition: "height 0.3s ease" }}
       >
         <Col className="d-flex align-items-center fw-bold fs-3 ms-4">
@@ -46,10 +48,13 @@ const Header = ({ categories }) => {
         <Col className="d-flex align-items-center justify-content-evenly gap-2">
           <FaHeart />
           <Link to={`/user/login`} className="withoutLink">
-            <FaRegUser />
+            {user._id ? <FaUserCheck color="red" /> : <FaRegUser />}
           </Link>
 
-          <FaShoppingCart />
+          <Link className="withoutLink" to={"/user/cart"}>
+            <FaShoppingCart />
+          </Link>
+
           <GiHamburgerMenu onClick={handleShow} />
           <HamburgerMenu
             show={show}

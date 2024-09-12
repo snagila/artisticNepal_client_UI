@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Badge, Button, Form, Spinner } from "react-bootstrap";
 import CustomInput from "../../reusable_Components/CustomInput";
 import { userLoginFields } from "./userLoginFields";
@@ -12,7 +12,7 @@ import { toast } from "react-toastify";
 const UserLoginForm = ({ initialFormData }) => {
   const { formData, handleOnChange } = useForm(initialFormData);
   const { user } = useSelector((state) => state.user);
-  console.log(user);
+
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -38,6 +38,21 @@ const UserLoginForm = ({ initialFormData }) => {
     toast.error("Something went wrong.Please try again later.");
     setIsLoading(false);
   };
+
+  useEffect(() => {
+    dispatch(getUserAction());
+    // if user exists [logged in], navigate to admin homepage
+    if (user?._id) {
+      dispatch(getUserAction());
+      navigate("/user/dashboard");
+      return;
+    }
+
+    // if not try auto login
+    // if (!admin._id) {
+    //   dispatch(autoLoginAction());
+    // }
+  }, [user?._id]);
   return (
     <>
       <Form onSubmit={handleOnSubmit}>

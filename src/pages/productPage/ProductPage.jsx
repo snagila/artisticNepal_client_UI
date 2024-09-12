@@ -4,12 +4,24 @@ import { useParams } from "react-router-dom";
 import { getAProductAction } from "../../redux/productRedux/productActions";
 import { useDispatch, useSelector } from "react-redux";
 import Header from "../../components/homepage_components/header/Header";
-import { Button, Col, Container, Form, Image, Row } from "react-bootstrap";
+import {
+  Button,
+  Col,
+  Container,
+  Form,
+  Image,
+  Row,
+  Spinner,
+} from "react-bootstrap";
 import { FaHeart } from "react-icons/fa";
 import ScrollTable from "../../components/reusable_Components/scrollableTable/ScrollTable";
+import { addItemsToCartActions } from "../../redux/cartItemRedux/cartItemsActions";
 
 const ProductPage = () => {
+  const { isLoading } = useSelector((state) => state.helper);
   const [productPicDisplay, setProductPicDisplay] = useState("");
+  const [selectedQuantity, setSelectedQuantity] = useState("1");
+  const { user } = useSelector((state) => state.user);
 
   const selectQuantity = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   const dispatch = useDispatch();
@@ -26,6 +38,23 @@ const ProductPage = () => {
     ?.map((picture) => picture)
     .concat(product.images?.map((images) => images));
 
+  const handleQuantityChange = (e) => {
+    setSelectedQuantity(e.target.value);
+  };
+
+  const handleAddItemToTheCart = (itemQuantity, product) => {
+    const cartItemObj = {
+      productId: product._id,
+      name: product.name,
+      quantity: itemQuantity,
+      price: product.price,
+      total: product.price * itemQuantity,
+      thumbnail: product.thumbnail,
+    };
+
+    dispatch(addItemsToCartActions(cartItemObj, user._id || ""));
+  };
+
   useEffect(() => {
     dispatch(getAProductAction(id));
   }, [id]);
@@ -38,7 +67,7 @@ const ProductPage = () => {
   return (
     <>
       <Header />
-      <Container>
+      <Container className="pt-5">
         <Row className="productPageRow1">
           <Col className=" productPageCol1" xs={12} md={1}>
             <Col xs={12} className="sidePicturesDiv">
@@ -76,14 +105,21 @@ const ProductPage = () => {
                 {" "}
                 $ {product.price}
               </Row>
+
               <Row>Reviews:</Row>
+
               <Row className="mt-2">
                 <Row className="mb-2">
-                  <Col xs={2} className="d-flex  align-items-center p-0">
+                  <Col xs={3} className="d-flex  align-items-center p-0">
                     Quantity:
                   </Col>
                   <Col>
-                    <Form.Select className="w-50">
+                    {/* ------================================================================ */}
+                    <Form.Select
+                      className="w-50"
+                      value={selectedQuantity}
+                      onChange={handleQuantityChange}
+                    >
                       {selectQuantity.map((quantity, i) => (
                         <option key={i}>{quantity}</option>
                       ))}
@@ -94,8 +130,16 @@ const ProductPage = () => {
                   <Button
                     className="w-100 "
                     style={{ background: "#444444", borderColor: "#444444" }}
+                    onClick={() =>
+                      handleAddItemToTheCart(selectedQuantity, product)
+                    }
+                    disabled={isLoading}
                   >
-                    Add to bag
+                    {isLoading ? (
+                      <Spinner animation="border" size="sm" />
+                    ) : (
+                      "Add to Cart"
+                    )}
                   </Button>
                 </Col>
                 <Col className="p-0 ps-1">
