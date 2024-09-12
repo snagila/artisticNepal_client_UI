@@ -1,3 +1,16 @@
-.card-img {
-  height: "10vh" !important;
+.cartitem-increment-btn,
+.cartitem-quantity-btn,
+.cartitem-decrement-btn {
+  border: 1px solid black;
+  width: 30px;
+  height: 35px;
+}
+
+.cartitem-quantity-btn {
+  width: 50px;
+  border-left: 0;
+  border-right: 0;
+}
+.cartitem-quantity-btn:hover {
+  cursor: default;
 }

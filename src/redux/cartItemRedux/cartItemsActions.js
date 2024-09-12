@@ -1,5 +1,9 @@
 import { toast } from "react-toastify";
-import { addItemsToCart, getItemsfromCart } from "../../axios/cartAxios";
+import {
+  addItemsToCart,
+  editProductQuantityAxios,
+  getItemsfromCart,
+} from "../../axios/cartAxios";
 import { setCartItems } from "./cartItemsSlice";
 import { setIsLoading } from "../helperRedux/helperSlice";
 
@@ -37,3 +41,16 @@ export const getCartItems = () => async (dispatch) => {
     return dispatch(setCartItems(result.data));
   }
 };
+
+// edit cart quantity
+export const editProductQuantityAction =
+  (cartId, productIdOnCart, productQuantity) => async (dispatch) => {
+    const result = await editProductQuantityAxios(
+      cartId,
+      productIdOnCart,
+      productQuantity
+    );
+    if (result.status === "success") {
+      dispatch(getCartItems());
+    }
+  };

@@ -25,3 +25,25 @@ export const getItemsfromCart = async () => {
     return error.message;
   }
 };
+
+// edit cart quantity
+export const editProductQuantityAxios = async (
+  cartId,
+  productIdOnCart,
+  productQuantity
+) => {
+  try {
+    const response = await axios.patch(
+      `${CART_BASE_URL}/editcart/${cartId}`,
+
+      { productIdOnCart, productQuantity },
+      {
+        headers: { Authorization: sessionStorage.getItem("accessJWT") },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    return error.message;
+  }
+};
