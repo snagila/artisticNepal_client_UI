@@ -1,14 +1,46 @@
-import React from "react";
+import React, { useState } from "react";
 import { Badge, Button, Form, Spinner } from "react-bootstrap";
 import CustomInput from "../../reusable_Components/CustomInput";
 import { userLoginFields } from "./userLoginFields";
 import useForm from "../../../customHooks/useForm";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { loginUser } from "../../../axios/userAxios";
+import { getUserAction } from "../../../redux/userRedux/userActions";
+import { toast } from "react-toastify";
 
 const UserLoginForm = ({ initialFormData }) => {
   const { formData, handleOnChange } = useForm(initialFormData);
+  const { user } = useSelector((state) => state.user);
+  console.log(user);
+  const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleOnSubmit = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+
+    const result = await loginUser(formData);
+
+    if (result.status === "error") {
+      setIsLoading(false);
+      return toast.error(result.message);
+    }
+
+    if (result.status === "success") {
+      sessionStorage.setItem("accessJWT", result.data.accessJWT);
+      localStorage.setItem("refreshJWT", result.data.refreshJWT);
+      dispatch(getUserAction());
+      setIsLoading(false);
+      return;
+    }
+    toast.error("Something went wrong.Please try again later.");
+    setIsLoading(false);
+  };
   return (
     <>
-      <Form>
+      <Form onSubmit={handleOnSubmit}>
         <Badge bg="danger">User Login</Badge>
 
         <hr />
@@ -28,11 +60,13 @@ const UserLoginForm = ({ initialFormData }) => {
         ))}
 
         <Button
-          variant="outline-primary"
-          className="btn-lg w-100"
+          variant="outline-secondary "
+          className=" w-100"
           type="submit"
+          disabled={isLoading}
+          size="sm"
         >
-          Login
+          {isLoading ? <Spinner animation="border" size="sm" /> : "Login"}
         </Button>
       </Form>
     </>

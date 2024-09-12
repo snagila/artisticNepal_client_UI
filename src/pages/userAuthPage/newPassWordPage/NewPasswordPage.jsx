@@ -1,14 +1,45 @@
-import React from "react";
+import React, { useState } from "react";
 import useForm from "../../../customHooks/useForm";
-import { Button, Form } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Button, Form, Spinner } from "react-bootstrap";
+import { Link, useSearchParams } from "react-router-dom";
+import { newPassword } from "../../../axios/userAxios";
 
 const NewPasswordPage = () => {
   const initialFormData = {
     password: "",
     confirmPassword: "",
   };
-  const { formData, handleOnChange } = useForm(initialFormData);
+  const [loading, setIsLoading] = useState(false);
+  const { formData, handleOnChange, setFormData } = useForm(initialFormData);
+  const { password, confirmPassword } = formData;
+  const [params] = useSearchParams();
+  const userEmail = params.get("e");
+  const token = params.get("id");
+
+  const handleOnSubmit = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+
+    if (password !== confirmPassword) {
+      setIsLoading(false);
+      return toast.error("Passwords do not match.");
+    }
+    const result = await newPassword({ password, token, userEmail });
+
+    if (result?.status === "error") {
+      setIsLoading(false);
+      return toast.error(result.message);
+    }
+
+    if (result?.status === "success") {
+      setIsLoading(false);
+      setFormData(initialFormData);
+      return toast.success(result.message);
+    }
+
+    toast.error("Something went wrong.Please try again later.");
+    setIsLoading(false);
+  };
   return (
     <>
       <>
@@ -41,7 +72,7 @@ const NewPasswordPage = () => {
             </Form.Group>
 
             <Button type="submit" className="mt-3 ms-4 w-75">
-              Reset Password
+              {loading ? <Spinner animation="border" /> : "Reset Password"}
             </Button>
           </Form>
           <Link to="/user/login" className="mt-1">

@@ -14,7 +14,7 @@ const initialFormData = {
 const User_SignUp = () => {
   return (
     <>
-      <div>
+      <div className="authFormCentering">
         <UserSignUpForm initialFormData={initialFormData} />
         <div className=" mt-2">
           Already a user? &nbsp;{" "}

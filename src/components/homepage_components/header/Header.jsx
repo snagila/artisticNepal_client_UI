@@ -45,7 +45,7 @@ const Header = ({ categories }) => {
 
         <Col className="d-flex align-items-center justify-content-evenly gap-2">
           <FaHeart />
-          <Link to={`user/login`} className="withoutLink">
+          <Link to={`/user/login`} className="withoutLink">
             <FaRegUser />
           </Link>
 

@@ -1,12 +1,36 @@
-import React from "react";
-import { Button, Col, Form, Row } from "react-bootstrap";
+import React, { useState } from "react";
+import { Button, Form, Row, Spinner } from "react-bootstrap";
 import { RiLockPasswordFill } from "react-icons/ri";
 import useForm from "../../../customHooks/useForm";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
+import { resetPassword } from "../../../axios/userAxios";
 
 const ResetPassword = () => {
   const initialFormData = { email: "" };
   const { formData, setFormData, handleOnChange } = useForm(initialFormData);
+  const [loading, setIsLoading] = useState(false);
+
+  const handleOnSubmit = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    const result = await resetPassword(formData);
+    console.log(result);
+    if (result?.status === "error") {
+      toast.error(result.message);
+      setIsLoading(false);
+      return;
+    }
+    if (result?.status === "success") {
+      toast.success(result.message);
+      setFormData(initialFormData);
+      setIsLoading(false);
+      return;
+    }
+
+    toast.error("Something went wrong. Please try again later.");
+    setIsLoading(false);
+  };
   return (
     <>
       <>
@@ -35,9 +59,15 @@ const ResetPassword = () => {
               <Button
                 type="submit"
                 className="mt-3 ms-4 w-75"
-                // disabled={loading}
+                disabled={loading}
+                variant="outline-secondary"
+                size="sm"
               >
-                Reset Password
+                {loading ? (
+                  <Spinner animation="border" size="sm" />
+                ) : (
+                  "Reset Password"
+                )}
               </Button>
             </Form>
           </Row>

@@ -25,7 +25,6 @@ export const userSignupFormFields = [
     name: "phone",
     type: "tel",
     placeholder: "Enter your phone number",
-    required: true,
   },
   {
     label: "Email",

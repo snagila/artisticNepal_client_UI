@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const CATEGORY_BASE_URL = `${
-  import.meta.env.VITE_APP_ADMIN_API_URL
+  import.meta.env.VITE_APP_USER_API_URL
 }/api/category`;
 
 export const getAllCategories = async () => {

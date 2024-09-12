@@ -1,8 +1,6 @@
 import axios from "axios";
 
-const PRODUCT_BASE_URL = `${
-  import.meta.env.VITE_APP_ADMIN_API_URL
-}/api/product`;
+const PRODUCT_BASE_URL = `${import.meta.env.VITE_APP_USER_API_URL}/api/product`;
 
 export const getProducts = async () => {
   try {
