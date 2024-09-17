@@ -15,6 +15,8 @@ import UserDashboard from "./pages/LoggedInUserPage/UserDashboard";
 import User_Private_Route from "./components/LoggedinUserPage_Components/User_Private_Route";
 import UserLayout from "./pages/LoggedInUserPage/UserLayout";
 import CartPage from "./pages/cartPage/CartPage";
+import Checkout_Page from "./pages/checkoutPage/Checkout_Page";
+import WishList_Page from "./pages/wishListPage/WishList_Page";
 
 function App() {
   return (
@@ -44,10 +46,20 @@ function App() {
           }
         >
           <Route path="/user/dashboard" element={<UserDashboard />} />
+          {/* <Route path="/user/checkout" element={<Checkout_Page />} /> */}
         </Route>
+        <Route
+          path="/user/checkout"
+          element={
+            <User_Private_Route>
+              <Checkout_Page />
+            </User_Private_Route>
+          }
+        ></Route>
 
         {/* cart routes */}
         <Route path={"/user/cart"} element={<CartPage />} />
+        <Route path="/user/wishlist" element={<WishList_Page />} />
       </Routes>
       <ToastContainer />
     </>

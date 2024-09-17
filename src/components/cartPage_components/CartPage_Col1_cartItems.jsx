@@ -6,6 +6,7 @@ import {
   deleteItemsFromCartAction,
   editProductQuantityAction,
 } from "../../redux/cartItemRedux/cartItemsActions";
+import { Link } from "react-router-dom";
 
 const CartPage_Col1_cartItems = ({ item }) => {
   const { isLoading } = useSelector((state) => state.helper);
@@ -40,11 +41,13 @@ const CartPage_Col1_cartItems = ({ item }) => {
         ) : (
           <Row xs={12}>
             <Col xs={4} className="p-0 m-0">
-              <Card.Img
-                src={item.thumbnail?.map((image) => image)}
-                alt=""
-                height={158}
-              />
+              <Link to={`/products/product/${item.sku}`}>
+                <Card.Img
+                  src={item.thumbnail?.map((image) => image)}
+                  alt=""
+                  height={158}
+                />
+              </Link>
             </Col>
 
             <Col>
@@ -55,7 +58,6 @@ const CartPage_Col1_cartItems = ({ item }) => {
                     <button
                       className="cartitem-decrement-btn"
                       onClick={() => setProductQuantity(productQuantity - 1)}
-                      disabled={productQuantity === item.availableQuantity}
                     >
                       -
                     </button>
@@ -80,7 +82,7 @@ const CartPage_Col1_cartItems = ({ item }) => {
               </Card.Body>
             </Col>
 
-            <Col xs={1} md={1} className="p-0">
+            <Col xs={1} md={1} className="p-0 text-end">
               <IoCloseSharp
                 size={25}
                 onClick={() => handleOnRemoveItems(item._id)}

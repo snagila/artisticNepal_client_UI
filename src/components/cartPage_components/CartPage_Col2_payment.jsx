@@ -1,10 +1,11 @@
 import React from "react";
 import { Button, Col, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const CartPage_Col2_payment = () => {
   const { cartItems } = useSelector((state) => state.cart);
-  console.log(cartItems);
+
   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
@@ -49,7 +50,9 @@ const CartPage_Col2_payment = () => {
         </Row>
       </div>
       <Row className="p-3 mt-2">
-        <Button variant="outline-secondary">Proceed To CheckOut</Button>
+        <Link to="/user/checkout">
+          <Button variant="outline-secondary">Proceed To CheckOut</Button>
+        </Link>
       </Row>
     </>
   );

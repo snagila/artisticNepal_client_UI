@@ -10,7 +10,7 @@ import { setIsLoading } from "../helperRedux/helperSlice";
 
 // add items to the cart
 export const addItemsToCartActions =
-  (cartItemObj, userID, cartItems) => async (dispatch) => {
+  (cartItemObj, userID) => async (dispatch) => {
     dispatch(setIsLoading(true));
     const result = await addItemsToCart(cartItemObj, userID);
 

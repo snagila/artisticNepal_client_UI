@@ -16,23 +16,26 @@ import {
 import { FaHeart } from "react-icons/fa";
 import ScrollTable from "../../components/reusable_Components/scrollableTable/ScrollTable";
 import { addItemsToCartActions } from "../../redux/cartItemRedux/cartItemsActions";
-import { setCartItems } from "../../redux/cartItemRedux/cartItemsSlice";
 import { toast } from "react-toastify";
+import { addWishListActions } from "../../redux/wishListRedux/wishListActions";
 
 const ProductPage = () => {
   const { isLoading } = useSelector((state) => state.helper);
-  const { cartItems } = useSelector((state) => state.cart);
+  const { product, products } = useSelector((state) => state.product);
 
   const [productPicDisplay, setProductPicDisplay] = useState("");
   const [selectedQuantity, setSelectedQuantity] = useState("1");
   const { user } = useSelector((state) => state.user);
 
-  const selectQuantity = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   const dispatch = useDispatch();
-  const { product, products } = useSelector((state) => state.product);
 
   const [productDescription, setProductDescription] = useState("");
   const { id } = useParams();
+
+  const availableQuantity = [];
+  for (let i = 0; i < product.quantity; i++) {
+    availableQuantity.push(i + 1);
+  }
 
   const similarCategoryProducts = products
     ?.filter((item) => item.category === product.category)
@@ -47,7 +50,6 @@ const ProductPage = () => {
   };
 
   const handleAddItemToTheCart = (itemQuantity, product) => {
-    console.log(product);
     const cartItemObj = {
       productId: product._id,
       name: product.name,
@@ -61,9 +63,24 @@ const ProductPage = () => {
       return toast.error("Please login to continue");
     }
 
-    dispatch(addItemsToCartActions(cartItemObj, user._id, cartItems));
+    dispatch(addItemsToCartActions(cartItemObj, user._id));
   };
 
+  const handleAddItemToWishList = (product) => {
+    const wishListItem = {
+      productId: product._id,
+      name: product.name,
+      sku: product.sku,
+      price: product.price,
+      thumbnail: product.thumbnail,
+      availableQuantity: product.quantity,
+    };
+    if (!user._id) {
+      return toast.error("Please login to continue");
+    }
+
+    dispatch(addWishListActions(product, user._id));
+  };
   useEffect(() => {
     dispatch(getAProductAction(id));
   }, [id]);
@@ -129,7 +146,7 @@ const ProductPage = () => {
                       value={selectedQuantity}
                       onChange={handleQuantityChange}
                     >
-                      {selectQuantity.map((quantity, i) => (
+                      {availableQuantity.map((quantity, i) => (
                         <option key={i}>{quantity}</option>
                       ))}
                     </Form.Select>
@@ -153,8 +170,12 @@ const ProductPage = () => {
                 </Col>
                 <Col className="p-0 ps-1">
                   {" "}
-                  <Button variant="outline-danger" size="md">
-                    <FaHeart />
+                  <Button
+                    variant="outline-danger"
+                    size="md"
+                    disabled={isLoading}
+                  >
+                    <FaHeart onClick={() => handleAddItemToWishList(product)} />
                   </Button>
                 </Col>
               </Row>
