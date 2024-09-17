@@ -7,7 +7,7 @@ export const getUserAction = () => async (dispatch) => {
     return;
   }
   const result = await getUser();
-  console.log(result);
+  // console.log(result);
   if (result?.status === "error") {
     toast.error(result.message);
     return;

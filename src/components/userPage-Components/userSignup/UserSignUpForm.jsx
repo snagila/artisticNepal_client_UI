@@ -76,15 +76,18 @@ const UserSignUpForm = ({ initialFormData }) => {
             </Col>
           ))}
         </Row>
-        <Button
-          variant="outline promary"
-          className="w-100"
-          type="submit"
-          size="sm"
-          disabled={isLoading}
-        >
-          {isLoading ? <Spinner animation="border" size="sm" /> : "Submit"}
-        </Button>
+        <div className="d-flex justify-content-center align-items-center">
+          {" "}
+          <Button
+            variant="outline-secondary"
+            className="w-50 "
+            type="submit"
+            size="sm"
+            disabled={isLoading}
+          >
+            {isLoading ? <Spinner animation="border" size="sm" /> : "Submit"}
+          </Button>
+        </div>
       </Form>
     </>
   );

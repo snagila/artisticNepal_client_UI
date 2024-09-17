@@ -29,18 +29,28 @@ export const getItemsfromCart = async () => {
 // edit cart quantity
 export const editProductQuantityAxios = async (
   cartId,
-  productIdOnCart,
-  productQuantity
+  productQuantity,
+  itemPrice
 ) => {
   try {
     const response = await axios.patch(
       `${CART_BASE_URL}/editcart/${cartId}`,
 
-      { productIdOnCart, productQuantity },
-      {
-        headers: { Authorization: sessionStorage.getItem("accessJWT") },
-      }
+      { productQuantity, itemPrice }
     );
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    return error.message;
+  }
+};
+
+// delete cart items
+export const deleteCartItems = async (cartID) => {
+  try {
+    const response = await axios.delete(`${CART_BASE_URL}/${cartID}`, {
+      headers: { Authorization: sessionStorage.getItem("accessJWT") },
+    });
     return response.data;
   } catch (error) {
     console.log(error);

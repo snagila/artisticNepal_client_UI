@@ -1,6 +1,7 @@
 import { toast } from "react-toastify";
 import {
   addItemsToCart,
+  deleteCartItems,
   editProductQuantityAxios,
   getItemsfromCart,
 } from "../../axios/cartAxios";
@@ -9,10 +10,7 @@ import { setIsLoading } from "../helperRedux/helperSlice";
 
 // add items to the cart
 export const addItemsToCartActions =
-  (cartItemObj, userID) => async (dispatch) => {
-    if (!userID) {
-      return dispatch(setCartItems(cartItemObj));
-    }
+  (cartItemObj, userID, cartItems) => async (dispatch) => {
     dispatch(setIsLoading(true));
     const result = await addItemsToCart(cartItemObj, userID);
 
@@ -44,13 +42,24 @@ export const getCartItems = () => async (dispatch) => {
 
 // edit cart quantity
 export const editProductQuantityAction =
-  (cartId, productIdOnCart, productQuantity) => async (dispatch) => {
+  (cartId, productQuantity, itemPrice) => async (dispatch) => {
     const result = await editProductQuantityAxios(
       cartId,
-      productIdOnCart,
-      productQuantity
+      productQuantity,
+      itemPrice
     );
     if (result.status === "success") {
       dispatch(getCartItems());
     }
   };
+
+// delete items from the cart
+export const deleteItemsFromCartAction = (cartID) => async (dispatch) => {
+  const result = await deleteCartItems(cartID);
+  if (result.status === "error") {
+    return toast.error(result.message);
+  }
+  if (result.status === "success") {
+    return dispatch(getCartItems());
+  }
+};

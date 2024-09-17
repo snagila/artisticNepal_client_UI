@@ -1,130 +1,55 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "./cartPage.css";
 import Header from "../../components/homepage_components/header/Header";
-import { Card, Col, Container, Row, Spinner } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  editProductQuantityAction,
-  getCartItems,
-} from "../../redux/cartItemRedux/cartItemsActions";
-import { IoCloseSharp } from "react-icons/io5";
+import { getCartItems } from "../../redux/cartItemRedux/cartItemsActions";
+import CartPage_Col1_cartItems from "../../components/cartPage_components/CartPage_Col1_cartItems";
+import CartPage_Col2_payment from "../../components/cartPage_components/CartPage_Col2_payment";
 
 const CartPage = () => {
-  const { isLoading } = useSelector((state) => state.helper);
   const { cartItems } = useSelector((state) => state.cart);
+  const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
-  const cardContents = cartItems?.map((allitems) => allitems);
 
-  const totalNumberOfItemsInCart = cardContents
-    ?.map((singleItem) =>
-      singleItem.items.map((item) => {
-        return item.quantity;
-      })
-    )
+  const totalNumberOfItemsInCart = cartItems
+    ?.map((singleItem) => {
+      return singleItem.quantity;
+    })
     .flat()
-    .reduce((acc, curr) => {
+    ?.reduce((acc, curr) => {
       return acc + curr;
-    });
+    }, 0);
 
   useEffect(() => {
-    dispatch(getCartItems());
-  }, []);
+    if (user?._id) {
+      dispatch(getCartItems());
+    }
+  }, [user]);
   return (
     <>
       <Header />
-      <Container className="pt-4">
-        <div className="fs-4 mb-1">
-          My Cart ( {totalNumberOfItemsInCart || 0} items )
-        </div>
-
+      <Container className="pt-4 m-auto">
         <Row>
-          <Col xs={12} md={6}>
-            {cardContents?.map((item) => {
-              const cartId = item._id;
-
-              return item.items.map((singleItem) => {
-                const productIdOnCart = singleItem._id;
-                const [productQuantity, setProductQuantity] = useState();
-
-                useEffect(() => {
-                  if (singleItem._id) {
-                    setProductQuantity(singleItem.quantity);
-                  }
-                }, [singleItem._id]);
-                useEffect(() => {
-                  dispatch(
-                    editProductQuantityAction(
-                      cartId,
-                      productIdOnCart,
-                      productQuantity
-                    )
-                  );
-                }, [productQuantity, productIdOnCart]);
-                return (
-                  <Card
-                    style={{ height: "10rem", backgroundColor: "#FFFCF6" }}
-                    className="mb-2 "
-                    key={item?._id}
-                  >
-                    {isLoading ? (
-                      <Spinner animation="border" size="lg" />
-                    ) : (
-                      <Row xs={12}>
-                        {/* {console.log(singleItem)} */}
-                        <Col xs={4} className="p-0 m-0">
-                          <Card.Img
-                            src={singleItem.thumbnail.map((image) => image)}
-                            alt=""
-                            height={158}
-                          />
-                        </Col>
-
-                        <Col>
-                          <Card.Body>
-                            <Card.Title className="text-nowrap">
-                              {singleItem.name}
-                            </Card.Title>
-                            <Card.Text className="pt-2">
-                              <div className="cart-quantity">
-                                <button
-                                  className="cartitem-decrement-btn"
-                                  onClick={() =>
-                                    setProductQuantity(productQuantity - 1)
-                                  }
-                                >
-                                  -
-                                </button>
-
-                                <button className="cartitem-quantity-btn ">
-                                  {productQuantity}
-                                </button>
-                                <button
-                                  className="cartitem-increment-btn"
-                                  onClick={() =>
-                                    setProductQuantity(productQuantity + 1)
-                                  }
-                                >
-                                  +
-                                </button>
-                              </div>
-                            </Card.Text>
-                            <div className=" d-flex justify-content-between align-items-center  fw-bold text-danger fs-4">
-                              $ {singleItem.price * singleItem.quantity}
-                            </div>
-                          </Card.Body>
-                        </Col>
-
-                        <Col xs={1} md={1} className="p-0">
-                          <IoCloseSharp size={25} />
-                        </Col>
-                      </Row>
-                    )}
-                  </Card>
-                );
-              });
-            })}
+          <Col xs={12} md={8} className="">
+            <Row className="fs-4 mb-1">
+              {" "}
+              My Cart ( {totalNumberOfItemsInCart || 0}{" "}
+              {totalNumberOfItemsInCart < 2 ? "item" : "items"} )
+            </Row>
+            <Row className="cartPage-col1">
+              {cartItems?.map((item) => {
+                return <CartPage_Col1_cartItems item={item} key={item._id} />;
+              })}
+            </Row>
           </Col>
-          <Col>sdjhfgsdjkfgksd</Col>
+
+          <Col style={{ height: "50vh" }} className="rounded m-1">
+            <div className="d-flex align-items-center justify-content-center fw-bold fs-4">
+              My Order Summery
+            </div>
+            <CartPage_Col2_payment />
+          </Col>
         </Row>
       </Container>
     </>

@@ -14,3 +14,8 @@
 .cartitem-quantity-btn:hover {
   cursor: default;
 }
+
+.cartPage-col1 {
+  max-height: 100vh;
+  overflow-x: scroll;
+}

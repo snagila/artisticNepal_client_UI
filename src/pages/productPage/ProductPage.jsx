@@ -16,9 +16,13 @@ import {
 import { FaHeart } from "react-icons/fa";
 import ScrollTable from "../../components/reusable_Components/scrollableTable/ScrollTable";
 import { addItemsToCartActions } from "../../redux/cartItemRedux/cartItemsActions";
+import { setCartItems } from "../../redux/cartItemRedux/cartItemsSlice";
+import { toast } from "react-toastify";
 
 const ProductPage = () => {
   const { isLoading } = useSelector((state) => state.helper);
+  const { cartItems } = useSelector((state) => state.cart);
+
   const [productPicDisplay, setProductPicDisplay] = useState("");
   const [selectedQuantity, setSelectedQuantity] = useState("1");
   const { user } = useSelector((state) => state.user);
@@ -43,16 +47,21 @@ const ProductPage = () => {
   };
 
   const handleAddItemToTheCart = (itemQuantity, product) => {
+    console.log(product);
     const cartItemObj = {
       productId: product._id,
       name: product.name,
       quantity: itemQuantity,
+      sku: product.sku,
       price: product.price,
-      total: product.price * itemQuantity,
       thumbnail: product.thumbnail,
+      availableQuantity: product.quantity,
     };
+    if (!user._id) {
+      return toast.error("Please login to continue");
+    }
 
-    dispatch(addItemsToCartActions(cartItemObj, user._id || ""));
+    dispatch(addItemsToCartActions(cartItemObj, user._id, cartItems));
   };
 
   useEffect(() => {

@@ -69,7 +69,7 @@ const UserLoginForm = ({ initialFormData }) => {
               name: field.name,
               value: formData[field.name],
               placeholder: field.placeholder,
-              required: Form.required,
+              required: field.required,
             }}
           />
         ))}
