@@ -5,9 +5,12 @@ const WISHLIST_API_URL = `${
 }/api/wishlist`;
 
 //add items to the wishlist
-export const addItemsTowishlist = async (product, userID) => {
+export const addItemsTowishlist = async (wishListItem, userID) => {
   try {
-    const response = await axios.post(WISHLIST_API_URL, { product, userID });
+    const response = await axios.post(WISHLIST_API_URL, {
+      wishListItem,
+      userID,
+    });
     return response.data;
   } catch (error) {
     console.log(error.message);
@@ -21,6 +24,28 @@ export const getItemsfromwishlist = async () => {
     const response = await axios.get(WISHLIST_API_URL, {
       headers: { Authorization: sessionStorage.getItem("accessJWT") },
     });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    return error.message;
+  }
+};
+
+// add wishlist item to cart
+export const addWishlistitemsToCart = async (item) => {
+  try {
+    const response = await axios.post(`${WISHLIST_API_URL}/${item._id}`, item);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    return error.message;
+  }
+};
+
+// delete items from wishlist
+export const deleteWishlistItem = async (itemSKU) => {
+  try {
+    const response = await axios.delete(`${WISHLIST_API_URL}/${itemSKU}`);
     return response.data;
   } catch (error) {
     console.log(error);

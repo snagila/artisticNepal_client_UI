@@ -67,19 +67,19 @@ const ProductPage = () => {
   };
 
   const handleAddItemToWishList = (product) => {
+    if (!user._id) {
+      return toast.error("Please login to continue");
+    }
     const wishListItem = {
       productId: product._id,
       name: product.name,
       sku: product.sku,
       price: product.price,
       thumbnail: product.thumbnail,
+      totalPrice: product.price,
       availableQuantity: product.quantity,
     };
-    if (!user._id) {
-      return toast.error("Please login to continue");
-    }
-
-    dispatch(addWishListActions(product, user._id));
+    dispatch(addWishListActions(wishListItem, user._id));
   };
   useEffect(() => {
     dispatch(getAProductAction(id));
@@ -174,8 +174,9 @@ const ProductPage = () => {
                     variant="outline-danger"
                     size="md"
                     disabled={isLoading}
+                    onClick={() => handleAddItemToWishList(product)}
                   >
-                    <FaHeart onClick={() => handleAddItemToWishList(product)} />
+                    <FaHeart />
                   </Button>
                 </Col>
               </Row>

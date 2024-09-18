@@ -32,7 +32,7 @@ const CartPage = () => {
       <Header />
       <Container className="pt-4 m-auto">
         {cartItems?.length === 0 && user._id && (
-          <Row className="fs-2 text-danger d-flex justify-content-center">
+          <Row className="fs-2 text-danger d-flex justify-content-center pt-5">
             {" "}
             No items in cart yet :(
           </Row>

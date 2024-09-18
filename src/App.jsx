@@ -17,8 +17,21 @@ import UserLayout from "./pages/LoggedInUserPage/UserLayout";
 import CartPage from "./pages/cartPage/CartPage";
 import Checkout_Page from "./pages/checkoutPage/Checkout_Page";
 import WishList_Page from "./pages/wishListPage/WishList_Page";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { getCategoriesAction } from "./redux/categoryRedux/categoryActions";
+import { getProductsAction } from "./redux/productRedux/productActions";
+import { getUserAction } from "./redux/userRedux/userActions";
+import { getWishListItems } from "./redux/wishListRedux/wishListActions";
 
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getCategoriesAction());
+    dispatch(getProductsAction());
+    dispatch(getUserAction());
+    dispatch(getWishListItems());
+  }, []);
   return (
     <>
       <Routes>

@@ -8,17 +8,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCategoriesAction } from "../../redux/categoryRedux/categoryActions";
 import { getProductsAction } from "../../redux/productRedux/productActions";
 import { Container } from "react-bootstrap";
-import ScrollTable from "../../components/reusable_Components/scrollableTable/ScrollTable";
 
 const HomePage = () => {
-  const dispatch = useDispatch();
   const { categories } = useSelector((state) => state.category);
-  const { products } = useSelector((state) => state.product);
 
-  useEffect(() => {
-    dispatch(getCategoriesAction());
-    dispatch(getProductsAction());
-  }, []);
   return (
     <>
       {" "}

@@ -40,7 +40,7 @@ const UserLoginForm = ({ initialFormData }) => {
   };
 
   useEffect(() => {
-    dispatch(getUserAction());
+    // dispatch(getUserAction());
     // if user exists [logged in], navigate to admin homepage
     if (user?._id) {
       dispatch(getUserAction());

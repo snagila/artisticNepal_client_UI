@@ -48,9 +48,7 @@ export const editProductQuantityAxios = async (
 // delete cart items
 export const deleteCartItems = async (cartID) => {
   try {
-    const response = await axios.delete(`${CART_BASE_URL}/${cartID}`, {
-      headers: { Authorization: sessionStorage.getItem("accessJWT") },
-    });
+    const response = await axios.delete(`${CART_BASE_URL}/${cartID}`);
     return response.data;
   } catch (error) {
     console.log(error);
