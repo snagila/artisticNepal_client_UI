@@ -69,11 +69,10 @@ export const deleteItemsFromCartAction = (cartID) => async (dispatch) => {
 // get order details
 export const getUserOrderAction = (userId) => async (dispatch) => {
   const result = await getOrder(userId);
-  console.log(result);
   if (result.status === "error") {
     return toast.error(error.message);
   }
-  setOrders(result.data);
+  dispatch(setOrders(result.data));
 };
 // place cart order
 export const placeOrderAction =

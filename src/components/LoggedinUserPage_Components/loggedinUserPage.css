@@ -1,0 +1,11 @@
+/* ORDERED ITEMS JSX */
+#orderHistoryViewDetailsImage {
+  width: 70%;
+  height: 5rem;
+}
+@media (max-width: 768px) {
+  #orderHistoryViewDetailsImage {
+    width: 50%;
+    height: 3rem;
+  }
+}
