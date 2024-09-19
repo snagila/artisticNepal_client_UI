@@ -17,6 +17,7 @@ const CartPage_Col2_payment = () => {
     ?.reduce((acc, curr) => {
       return acc + curr;
     }, 0);
+
   const totalPrice = cartItems
     ?.map((singleItem) => {
       return singleItem.totalPrice;

@@ -4,8 +4,10 @@ import {
   deleteCartItems,
   editProductQuantityAxios,
   getItemsfromCart,
+  getOrder,
+  placeOrder,
 } from "../../axios/cartAxios";
-import { setCartItems } from "./cartItemsSlice";
+import { setCartItems, setOrders } from "./cartItemsSlice";
 import { setIsLoading } from "../helperRedux/helperSlice";
 
 // add items to the cart
@@ -63,3 +65,25 @@ export const deleteItemsFromCartAction = (cartID) => async (dispatch) => {
     return dispatch(getCartItems());
   }
 };
+
+// get order details
+export const getUserOrderAction = (userId) => async (dispatch) => {
+  const result = await getOrder(userId);
+  console.log(result);
+  if (result.status === "error") {
+    return toast.error(error.message);
+  }
+  setOrders(result.data);
+};
+// place cart order
+export const placeOrderAction =
+  (cartItems, totalPrice, userId) => async (dispatch) => {
+    const result = await placeOrder(cartItems, totalPrice, userId);
+    console.log(result);
+    if (result.status === "error") {
+      toast.error(result.message);
+    }
+    if (result.status === "success") {
+      dispatch(getUserOrderAction(userId));
+    }
+  };

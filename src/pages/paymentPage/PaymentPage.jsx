@@ -4,6 +4,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Alert, Container, Stack } from "react-bootstrap";
 import CheckoutForm from "./CheckOutForm";
+import Header from "../../components/homepage_components/header/Header";
 
 // https://docs.stripe.com/stripe-js/react
 
@@ -35,24 +36,27 @@ const PaymentPage = () => {
   }, []);
 
   return (
-    <Container>
-      {clientSecret && (
-        <Elements stripe={stripePromise} options={options}>
-          <Stack className="justify-content-center align-items-center vh-100">
-            <Alert variant="success" className="shadow-lg rounded">
-              STRIPE PAYMENT INTEGRATION DEMO
-            </Alert>
-            <Alert>
-              Card no: 4242 4242 4242 4242 <br />
-              Expiry date: any future value <br />
-              CVC:Use any three-digit CVC (four digits for American Express
-              cards)
-            </Alert>
-            <CheckoutForm />
-          </Stack>
-        </Elements>
-      )}
-    </Container>
+    <>
+      <Header />
+      <Container>
+        {clientSecret && (
+          <Elements stripe={stripePromise} options={options}>
+            <Stack className="justify-content-center align-items-center mt-5">
+              <Alert variant="success" className="shadow-lg rounded">
+                STRIPE PAYMENT INTEGRATION DEMO
+              </Alert>
+              <Alert>
+                Card no: 4242 4242 4242 4242 <br />
+                Expiry date: any future value <br />
+                CVC:Use any three-digit CVC (four digits for American Express
+                cards)
+              </Alert>
+              <CheckoutForm />
+            </Stack>
+          </Elements>
+        )}
+      </Container>
+    </>
   );
 };
 

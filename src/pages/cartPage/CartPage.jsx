@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 const CartPage = () => {
   const { cartItems } = useSelector((state) => state.cart);
   const { user } = useSelector((state) => state.user);
-
+  console.log(cartItems);
   const dispatch = useDispatch();
 
   const totalNumberOfItemsInCart = cartItems
@@ -33,7 +33,7 @@ const CartPage = () => {
     <>
       <Header />
       <Container className="pt-4 m-auto">
-        {cartItems?.length === 0 && user._id && (
+        {cartItems?.length === 0 && user?._id && (
           <Row className="fs-2 text-danger d-flex justify-content-center pt-5">
             {" "}
             No items in cart yet :(
@@ -73,9 +73,9 @@ const CartPage = () => {
                   <div>{user.address}</div>
                   <div>{user.email}</div>
                 </Col>
-                {/* <Col>
+                <Col>
                   <Button variant="outline-primary">Update Details</Button>
-                </Col> */}
+                </Col>
               </Row>
               <Row>
                 <CartPage_Col2_payment />

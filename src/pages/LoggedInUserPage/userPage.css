@@ -1,0 +1,9 @@
+/* NAV LINK LAYOUT CSS */
+.custom-tabs .nav-link {
+  color: black;
+}
+
+.custom-tabs .nav-link.active {
+  color: whitesmoke;
+  background: #6c757d;
+}

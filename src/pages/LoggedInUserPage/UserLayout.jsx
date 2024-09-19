@@ -1,4 +1,5 @@
 import React from "react";
+import "./userPage.css";
 import { useSelector } from "react-redux";
 import Header from "../../components/homepage_components/header/Header";
 import { Container, Tab, Tabs } from "react-bootstrap";
@@ -12,11 +13,11 @@ const UserLayout = () => {
       <Header />
       <Container className="pt-4">
         <Tabs
-          defaultActiveKey="profile"
+          defaultActiveKey="orders"
           id="uncontrolled-tab-example"
-          className="mb-3"
+          className="mb-3 custom-tabs"
         >
-          <Tab eventKey="home" title="Home">
+          <Tab eventKey="orders" title="My Order History">
             Tab content for Home
           </Tab>
           <Tab eventKey="profile" title="Profile">
