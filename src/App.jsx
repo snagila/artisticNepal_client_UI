@@ -11,7 +11,6 @@ import VerifyUser from "./pages/userAuthPage/verifyUserPage/VerifyUser";
 import User_SignUp from "./pages/userAuthPage/userSignUp/User_SignUp";
 import ResetPassword from "./pages/userAuthPage/userResetPassWord/ResetPassword";
 import NewPasswordPage from "./pages/userAuthPage/newPassWordPage/NewPasswordPage";
-import UserDashboard from "./pages/LoggedInUserPage/UserDashboard";
 import User_Private_Route from "./components/LoggedinUserPage_Components/User_Private_Route";
 import UserLayout from "./pages/LoggedInUserPage/UserLayout";
 import CartPage from "./pages/cartPage/CartPage";
@@ -23,6 +22,7 @@ import { getCategoriesAction } from "./redux/categoryRedux/categoryActions";
 import { getProductsAction } from "./redux/productRedux/productActions";
 import { getUserAction } from "./redux/userRedux/userActions";
 import { getWishListItems } from "./redux/wishListRedux/wishListActions";
+import PaymentSuccessPage from "./pages/paymentPage/PaymentSuccess";
 
 function App() {
   const dispatch = useDispatch();
@@ -52,15 +52,14 @@ function App() {
         </Route>
 
         <Route
+          path="/user/dashboard"
           element={
             <User_Private_Route>
               <UserLayout />
             </User_Private_Route>
           }
-        >
-          <Route path="/user/dashboard" element={<UserDashboard />} />
-          {/* <Route path="/user/checkout" element={<Checkout_Page />} /> */}
-        </Route>
+        ></Route>
+
         <Route
           path="/user/checkout"
           element={
@@ -73,6 +72,7 @@ function App() {
         {/* cart routes */}
         <Route path={"/user/cart"} element={<CartPage />} />
         <Route path="/user/wishlist" element={<WishList_Page />} />
+        <Route path="/payment-success" element={<PaymentSuccessPage />} />
       </Routes>
       <ToastContainer />
     </>

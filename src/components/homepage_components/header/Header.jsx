@@ -51,7 +51,7 @@ const Header = ({ categories }) => {
           </Link>
 
           <Link to={`/user/login`} className="withoutLink">
-            {user._id ? <FaUserCheck color="red" /> : <FaRegUser />}
+            {user?._id ? <FaUserCheck color="red" /> : <FaRegUser />}
           </Link>
 
           <Link className="withoutLink" to={"/user/cart"}>

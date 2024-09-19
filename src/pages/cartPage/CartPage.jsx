@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 const CartPage = () => {
   const { cartItems } = useSelector((state) => state.cart);
   const { user } = useSelector((state) => state.user);
+
   const dispatch = useDispatch();
 
   const totalNumberOfItemsInCart = cartItems
@@ -27,6 +28,7 @@ const CartPage = () => {
       dispatch(getCartItems());
     }
   }, [user]);
+
   return (
     <>
       <Header />
@@ -58,11 +60,26 @@ const CartPage = () => {
               </Row>
             </Col>
 
-            <Col style={{ height: "50vh" }} className="rounded m-1">
-              <div className="d-flex align-items-center justify-content-center fw-bold fs-4">
+            <Col className="rounded m-1">
+              <Row className="d-flex align-items-center justify-content-center fw-bold fs-4">
+                {" "}
                 My Order Summery
-              </div>
-              <CartPage_Col2_payment />
+              </Row>
+              <Row className="p-3 mt-2" style={{ backgroundColor: "#FFFCF7" }}>
+                <Col xs={12}>
+                  <div>
+                    {user.firstName} {user.lastName}
+                  </div>
+                  <div>{user.address}</div>
+                  <div>{user.email}</div>
+                </Col>
+                {/* <Col>
+                  <Button variant="outline-primary">Update Details</Button>
+                </Col> */}
+              </Row>
+              <Row>
+                <CartPage_Col2_payment />
+              </Row>
             </Col>
           </Row>
         )}

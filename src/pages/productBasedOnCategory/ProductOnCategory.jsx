@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../../components/homepage_components/header/Header";
 import { Card, Col, Container, Form, Row } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
@@ -6,10 +6,13 @@ import { useSelector } from "react-redux";
 import ProductSwiper from "../../components/productOnCategorySwiper/ProductSwiper";
 
 const ProductOnCategory = () => {
-  const { id } = useParams();
-
   const { categories } = useSelector((state) => state.category);
   const { products } = useSelector((state) => state.product);
+
+  const [sortedProducts, setSortedProducts] = useState([]);
+  console.log(sortedProducts);
+  const { id } = useParams();
+
   const productCategory = categories?.find(
     (category) => category.category === id
   );
@@ -17,6 +20,22 @@ const ProductOnCategory = () => {
     (product) => product.category === id
   );
 
+  const handleSelectChange = (e) => {
+    const value = e.target.value;
+    let sortedArray = [...sameCategoryProduct];
+    if (value === "priceAscending") {
+      sortedArray.sort((a, b) => a.price - b.price);
+    } else if (value === "priceDescending") {
+      sortedArray.sort((a, b) => b.price - a.price);
+    } else {
+      sortedArray.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
+    }
+    setSortedProducts(sortedArray);
+  };
+
+  useEffect(() => {
+    setSortedProducts(sameCategoryProduct);
+  }, [products]);
   return (
     <>
       <Header />
@@ -32,11 +51,11 @@ const ProductOnCategory = () => {
                 &nbsp; ({sameCategoryProduct.length} products found)
               </Col>
               <Col className="d-flex justify-content-end ">
-                <Form.Select className="  w-25 ">
+                <Form.Select className="  w-25 " onChange={handleSelectChange}>
                   <option>Filter Product</option>
-                  <option>Newest</option>
-                  <option>Price (Low - High)</option>
-                  <option>Price(High -Low)</option>
+                  <option value={"newest"}>Newest</option>
+                  <option value={"priceAscending"}>Price (Low - High)</option>
+                  <option value={"priceDescending"}>Price(High -Low)</option>
                   {/* Add more options here */}
                 </Form.Select>
               </Col>
@@ -46,7 +65,7 @@ const ProductOnCategory = () => {
         <div>
           <Container>
             <Row className="">
-              {sameCategoryProduct?.map((product) => (
+              {sortedProducts?.map((product) => (
                 <Col
                   className="mt-3 d-flex align-items-center justify-content-center "
                   key={product._id}

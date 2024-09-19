@@ -1,10 +1,10 @@
 import React from "react";
-import Header from "../../components/homepage_components/header/Header";
+import PaymentPage from "../paymentPage/PaymentPage";
 
 const Checkout_Page = () => {
   return (
     <>
-      <Header />
+      <PaymentPage />
     </>
   );
 };
