@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Alert, Button, Col, Container, Image, Row } from "react-bootstrap";
+import "./loggedinUserPage.css";
+import { Button, Col, Container, Image, Row } from "react-bootstrap";
 import OrderedItems from "./OrderedItems";
 
 const UserOrderHistory = ({ orders }) => {
@@ -20,7 +21,6 @@ const UserOrderHistory = ({ orders }) => {
             className="py-2 gap-2 mt-3 rounded"
             style={{ background: "#FFFCF6" }}
           >
-            {console.log(item)}
             <Col className="" xs={12} md={6}>
               <Row>
                 <span> Order no:</span>
@@ -65,15 +65,7 @@ const UserOrderHistory = ({ orders }) => {
                 <Row style={{ overflowX: "scroll" }}>
                   {item.orderItems.map((singleitem) => {
                     return singleitem.thumbnail.map((image) => {
-                      return (
-                        <Image
-                          src={image}
-                          style={{
-                            height: "8rem",
-                            width: "8rem",
-                          }}
-                        />
-                      );
+                      return <Image id="orderHistoryImage" src={image} />;
                     });
                   })}
                 </Row>

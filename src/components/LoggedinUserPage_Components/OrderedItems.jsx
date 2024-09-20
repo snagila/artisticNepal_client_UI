@@ -6,7 +6,7 @@ const OrderedItems = ({ item }) => {
   return (
     <>
       {item.orderItems.map((item) => (
-        <Alert style={{ padding: "0" }} variant="dark-outline" key={item._id}>
+        <Alert style={{ padding: "0" }} variant="none" key={item._id}>
           <Row className="ps-2">
             <Col xs={4}>
               <Image

@@ -42,7 +42,7 @@ const ResetPassword = () => {
             Please enter your email to reset your password
           </Row>
           <Row>
-            <Form>
+            <Form onSubmit={handleOnSubmit}>
               <Form.Group>
                 <Form.Label className="fw-bold"></Form.Label>
                 <Form.Control

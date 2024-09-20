@@ -77,3 +77,33 @@ export const getUser = async () => {
     return error.message;
   }
 };
+
+// change user details from the user page
+export const changeUserDetails = async (formData, userId) => {
+  try {
+    const response = await axios.post(
+      `${USER_API_URL}/update-details/${userId}`,
+      formData,
+      { headers: { Authorization: sessionStorage.getItem("accessJWT") } }
+    );
+    return response.data;
+  } catch (error) {
+    console.log(error.message);
+    return error.message;
+  }
+};
+
+// change userPassword from userPage
+export const updateUserPassword = async (formData, userId) => {
+  try {
+    const response = await axios.post(
+      `${USER_API_URL}/update-password/${userId}`,
+      formData,
+      { headers: { Authorization: sessionStorage.getItem("accessJWT") } }
+    );
+    return response.data;
+  } catch (error) {
+    console.log(error.message);
+    return error.message;
+  }
+};

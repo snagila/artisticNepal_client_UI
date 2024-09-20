@@ -5,13 +5,12 @@ import Header from "../../components/homepage_components/header/Header";
 import { Container, Tab, Tabs } from "react-bootstrap";
 import UserOrderHistory from "../../components/LoggedinUserPage_Components/UserOrderHistory";
 import { getUserOrderAction } from "../../redux/cartItemRedux/cartItemsActions";
+import MyAccount from "../../components/LoggedinUserPage_Components/MyAccount";
 
 const UserLayout = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
   const { orders } = useSelector((state) => state.cart);
-
-  const { firstName, lastName, email } = user;
 
   useEffect(() => {
     dispatch(getUserOrderAction(user._id));
@@ -28,11 +27,8 @@ const UserLayout = () => {
           <Tab eventKey="orders" title="My Order History">
             <UserOrderHistory orders={orders} />
           </Tab>
-          <Tab eventKey="profile" title="Profile">
-            Tab content for Profile
-          </Tab>
-          <Tab eventKey="contact" title="Contact">
-            Tab content for Contact
+          <Tab eventKey="profile" title="My Account">
+            <MyAccount user={user} />
           </Tab>
         </Tabs>
       </Container>

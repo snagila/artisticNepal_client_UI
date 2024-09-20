@@ -3,9 +3,19 @@
   width: 70%;
   height: 5rem;
 }
+
+/* user order history */
+#orderHistoryImage {
+  height: 8rem;
+  width: 8rem;
+}
 @media (max-width: 768px) {
   #orderHistoryViewDetailsImage {
     width: 50%;
     height: 3rem;
+  }
+  #orderHistoryImage {
+    height: 4rem;
+    width: 4rem;
   }
 }
