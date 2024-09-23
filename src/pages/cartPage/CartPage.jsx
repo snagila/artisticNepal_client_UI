@@ -11,7 +11,6 @@ import { Link } from "react-router-dom";
 const CartPage = () => {
   const { cartItems } = useSelector((state) => state.cart);
   const { user } = useSelector((state) => state.user);
-  console.log(cartItems);
   const dispatch = useDispatch();
 
   const totalNumberOfItemsInCart = cartItems

@@ -13,9 +13,9 @@ export const getUserAction = () => async (dispatch) => {
     return;
   }
   const result = await getUser();
-  // console.log(result);
   if (result?.status === "error") {
     toast.error(result.message);
+
     return;
   }
   dispatch(setUser(result.data));
@@ -28,7 +28,10 @@ export const editUserDetailsAction = (formData, userId) => async (dispatch) => {
 
   if (result.status === "error") {
     dispatch(setIsLoading(false));
-    return toast.error(result.message);
+
+    // toast.error(result.message);
+    toast.error("to ho error");
+    return;
   }
   if (result.status === "success") {
     dispatch(getUserAction());

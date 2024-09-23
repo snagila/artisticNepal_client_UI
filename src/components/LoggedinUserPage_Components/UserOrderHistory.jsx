@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./loggedinUserPage.css";
 import { Button, Col, Container, Image, Row } from "react-bootstrap";
 import OrderedItems from "./OrderedItems";
+import { FaPlus } from "react-icons/fa";
 
 const UserOrderHistory = ({ orders }) => {
   const [openIndex, setOpenIndex] = useState([]);
@@ -62,12 +63,24 @@ const UserOrderHistory = ({ orders }) => {
                     items
                   </span>{" "}
                 </Row>
-                <Row style={{ overflowX: "scroll" }}>
-                  {item.orderItems.map((singleitem) => {
-                    return singleitem.thumbnail.map((image) => {
-                      return <Image id="orderHistoryImage" src={image} />;
-                    });
-                  })}
+                <Row>
+                  <Col id="historyImagesdiv">
+                    {item.orderItems.map((singleitem) => {
+                      return singleitem.thumbnail.map((image) => {
+                        return <Image id="orderHistoryImage" src={image} />;
+                      });
+                    })}
+                  </Col>
+                  {item.orderItems.length > 2 && (
+                    <Col xs={2}>
+                      <div
+                        className="d-flex  align-items-center p-0"
+                        id="orderhistoryPlusLogo"
+                      >
+                        <FaPlus />
+                      </div>
+                    </Col>
+                  )}
                 </Row>
               </Col>
             )}

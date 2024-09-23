@@ -64,8 +64,6 @@ const MyAccount = ({ user }) => {
   const handleOnPasswordSubmit = (e) => {
     e.preventDefault();
     const action = dispatch(changeUserPassword(passwordFormData, user?._id));
-
-    console.log(passwordFormData);
   };
   return (
     <>
@@ -135,8 +133,8 @@ const MyAccount = ({ user }) => {
             <Accordion.Body>
               <Form onSubmit={handleOnPasswordSubmit}>
                 <Row>
-                  {myAccountPassWordInput.map((field) => (
-                    <Row>
+                  {myAccountPassWordInput.map((field, i) => (
+                    <Row key={i}>
                       <CustomInput
                         handleOnChange={
                           letUserUpdateDetails ? handlePasswordChange : ""
@@ -167,6 +165,10 @@ const MyAccount = ({ user }) => {
             </Accordion.Body>
           </Accordion.Item>
         </Accordion>
+        <div className="mt-3 d-flex justify-content-end ">
+          {" "}
+          <Button variant="danger">Log Out</Button>
+        </div>
       </Container>
     </>
   );

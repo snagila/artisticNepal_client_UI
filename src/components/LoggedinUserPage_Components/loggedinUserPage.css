@@ -4,6 +4,15 @@
   height: 5rem;
 }
 
+#orderhistoryPlusLogo {
+  display: none !important;
+  background: yellow;
+}
+
+#historyImagesdiv {
+  max-height: 129px;
+  overflow-x: scroll;
+}
 /* user order history */
 #orderHistoryImage {
   height: 8rem;
@@ -17,5 +26,11 @@
   #orderHistoryImage {
     height: 4rem;
     width: 4rem;
+  }
+  #historyImagesdiv {
+    overflow-x: scroll;
+  }
+  #orderhistoryPlusLogo {
+    display: block !important;
   }
 }

@@ -4,13 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import Header from "../../components/homepage_components/header/Header";
 import { Container, Tab, Tabs } from "react-bootstrap";
 import UserOrderHistory from "../../components/LoggedinUserPage_Components/UserOrderHistory";
-import { getUserOrderAction } from "../../redux/cartItemRedux/cartItemsActions";
+
 import MyAccount from "../../components/LoggedinUserPage_Components/MyAccount";
+import { getUserOrderAction } from "../../redux/orderRedux/orderActions";
 
 const UserLayout = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
-  const { orders } = useSelector((state) => state.cart);
+  const { orders } = useSelector((state) => state.order);
 
   useEffect(() => {
     dispatch(getUserOrderAction(user._id));

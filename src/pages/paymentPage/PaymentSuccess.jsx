@@ -2,11 +2,9 @@ import { useEffect } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { Link, useSearchParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getCartItems,
-  placeOrderAction,
-} from "../../redux/cartItemRedux/cartItemsActions";
+import { getCartItems } from "../../redux/cartItemRedux/cartItemsActions";
 import Header from "../../components/homepage_components/header/Header";
+import { placeOrderAction } from "../../redux/orderRedux/orderActions";
 
 const PaymentSuccessPage = () => {
   const dispatch = useDispatch();

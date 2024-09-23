@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { Alert, Container, Stack } from "react-bootstrap";
 import CheckoutForm from "./CheckOutForm";
 import Header from "../../components/homepage_components/header/Header";
+import { useSelector } from "react-redux";
 
 // https://docs.stripe.com/stripe-js/react
 
@@ -15,6 +16,8 @@ const API_BASE_URL = `${import.meta.env.VITE_APP_USER_API_URL}/api/stripe`;
 
 const PaymentPage = () => {
   const [clientSecret, setClientSecret] = useState("");
+  const { orders } = useSelector((state) => state.order);
+  console.log(orders);
 
   const options = {
     // passing the client secret obtained from the server
