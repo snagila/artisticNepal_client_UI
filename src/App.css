@@ -1,6 +1,8 @@
 .withoutLink {
   text-decoration: none;
   color: inherit;
+  display: inline-block; /* Makes it behave more like an inline element but still allows width, padding, etc. */
+  width: auto;
 }
 body {
   background-color: rgb(245, 239, 232);

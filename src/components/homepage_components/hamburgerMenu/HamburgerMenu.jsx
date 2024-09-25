@@ -9,7 +9,6 @@ import { useEffect } from "react";
 import { getAllCategories } from "../../../axios/categoryAxios";
 
 function HamburgerMenu({ show, handleClose }) {
-  const { products } = useSelector((state) => state.product);
   const { categories } = useSelector((state) => state.category);
 
   useEffect(() => {

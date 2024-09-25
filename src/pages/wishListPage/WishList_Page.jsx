@@ -42,8 +42,11 @@ const WishList_Page = () => {
               WishList
             </Row>
             <Row className="fs-2 text-danger d-flex justify-content-center pt-5">
-              Please &nbsp;<Link to={"/user/login"}>login</Link> &nbsp; to add
-              items.
+              Please
+              <Link to={"/user/login"} className="withoutLink text-primary">
+                login
+              </Link>{" "}
+              to add items.
             </Row>
           </Row>
         )}

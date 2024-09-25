@@ -21,7 +21,8 @@
 }
 .card-main-body {
   width: 15rem;
-  background: #f5efe8;
+  height: 30vh;
+  background: #f5efe8 !important;
 }
 
 .main-img {
@@ -33,4 +34,8 @@
   .card-main-body {
     width: 8rem;
   }
+  /* .main-img {
+    width: 100%;
+    min-height: 25vh;
+  } */
 }

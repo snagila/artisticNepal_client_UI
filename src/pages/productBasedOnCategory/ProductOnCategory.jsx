@@ -10,7 +10,7 @@ const ProductOnCategory = () => {
   const { products } = useSelector((state) => state.product);
 
   const [sortedProducts, setSortedProducts] = useState([]);
-  console.log(sortedProducts);
+
   const { id } = useParams();
 
   const productCategory = categories?.find(
@@ -35,7 +35,7 @@ const ProductOnCategory = () => {
 
   useEffect(() => {
     setSortedProducts(sameCategoryProduct);
-  }, [products]);
+  }, [id]);
   return (
     <>
       <Header />

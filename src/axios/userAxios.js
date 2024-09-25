@@ -31,7 +31,7 @@ export const verifyUser = async (verifyUserObj) => {
 export const resetPassword = async (formData) => {
   try {
     const response = await axios.post(
-      `${USER_API_URL_API_URL}/reset-password`,
+      `${USER_API_URL}/reset-password`,
       formData
     );
     return response.data;
@@ -43,6 +43,7 @@ export const resetPassword = async (formData) => {
 // newPassword change
 export const newPassword = async (data) => {
   try {
+    console.log(data);
     const response = await axios.post(
       `${USER_API_URL}/reset-password/newpassword`,
       data
@@ -101,6 +102,17 @@ export const updateUserPassword = async (formData, userId) => {
       formData,
       { headers: { Authorization: sessionStorage.getItem("accessJWT") } }
     );
+    return response.data;
+  } catch (error) {
+    console.log(error.message);
+    return error.message;
+  }
+};
+
+//LOGOUT USER
+export const logoutUser = async (email) => {
+  try {
+    const response = await axios.post(`${USER_API_URL}/logout`, { email });
     return response.data;
   } catch (error) {
     console.log(error.message);

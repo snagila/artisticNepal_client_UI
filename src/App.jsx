@@ -43,7 +43,7 @@ function App() {
         <Route element={<AuthLayout />}>
           <Route path="/user/login" element={<UserLogin />} />
           <Route path="/user/signup" element={<User_SignUp />} />
-          <Route path="/user/verify-useremail" element={<VerifyUser />} />
+          <Route path="/user/verify-email" element={<VerifyUser />} />
           <Route path="/user/reset-password" element={<ResetPassword />} />
           <Route
             path="user/reset-password/newpassword"

@@ -3,6 +3,7 @@ import useForm from "../../../customHooks/useForm";
 import { Button, Form, Spinner } from "react-bootstrap";
 import { Link, useSearchParams } from "react-router-dom";
 import { newPassword } from "../../../axios/userAxios";
+import { toast } from "react-toastify";
 
 const NewPasswordPage = () => {
   const initialFormData = {
@@ -24,6 +25,7 @@ const NewPasswordPage = () => {
       setIsLoading(false);
       return toast.error("Passwords do not match.");
     }
+
     const result = await newPassword({ password, token, userEmail });
 
     if (result?.status === "error") {
@@ -45,7 +47,7 @@ const NewPasswordPage = () => {
       <>
         <div className="authFormCentering">
           {" "}
-          <Form>
+          <Form onSubmit={handleOnSubmit}>
             <Form.Group>
               <Form.Label className="fw-bold">Password:</Form.Label>
               <Form.Control

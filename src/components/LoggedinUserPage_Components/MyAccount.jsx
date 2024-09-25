@@ -18,9 +18,12 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   changeUserPassword,
   editUserDetailsAction,
+  logoutUserAction,
 } from "../../redux/userRedux/userActions";
+import { toast } from "react-toastify";
 
 const MyAccount = ({ user }) => {
+  const userEmail = user.email;
   const { isLoading } = useSelector((state) => state.helper);
   const [letUserUpdateDetails, setUserUpdateDetails] = useState(false);
   const dispatch = useDispatch();
@@ -61,9 +64,27 @@ const MyAccount = ({ user }) => {
       setUserUpdateDetails(false);
     }
   };
-  const handleOnPasswordSubmit = (e) => {
+
+  const handleOnPasswordSubmit = async (e) => {
     e.preventDefault();
-    const action = dispatch(changeUserPassword(passwordFormData, user?._id));
+    const { newPassword, confirmNewPassword, currentPassword } =
+      passwordFormData;
+    if (newPassword !== confirmNewPassword) {
+      return toast.error("Passwords do not match.");
+    }
+    const action = await dispatch(
+      changeUserPassword({ currentPassword, newPassword, userEmail }, user?._id)
+    );
+
+    if (action === "success") {
+      setPasswordFormData(initialFormData);
+    }
+  };
+
+  const handleLogOut = () => {
+    if (window.confirm("Do you want to log out?")) {
+      dispatch(logoutUserAction(userEmail));
+    }
   };
   return (
     <>
@@ -136,9 +157,7 @@ const MyAccount = ({ user }) => {
                   {myAccountPassWordInput.map((field, i) => (
                     <Row key={i}>
                       <CustomInput
-                        handleOnChange={
-                          letUserUpdateDetails ? handlePasswordChange : ""
-                        }
+                        handleOnChange={handlePasswordChange}
                         label={field.label}
                         inputAttributes={{
                           name: field.name,
@@ -167,7 +186,9 @@ const MyAccount = ({ user }) => {
         </Accordion>
         <div className="mt-3 d-flex justify-content-end ">
           {" "}
-          <Button variant="danger">Log Out</Button>
+          <Button variant="danger" onClick={handleLogOut}>
+            Log Out
+          </Button>
         </div>
       </Container>
     </>

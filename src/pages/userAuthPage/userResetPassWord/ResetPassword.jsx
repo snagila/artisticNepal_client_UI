@@ -14,8 +14,9 @@ const ResetPassword = () => {
   const handleOnSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
+
     const result = await resetPassword(formData);
-    console.log(result);
+
     if (result?.status === "error") {
       toast.error(result.message);
       setIsLoading(false);

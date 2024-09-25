@@ -15,7 +15,7 @@
 }
 /* user order history */
 #orderHistoryImage {
-  height: 8rem;
+  height: 100%;
   width: 8rem;
 }
 @media (max-width: 768px) {
