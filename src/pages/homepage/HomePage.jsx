@@ -18,7 +18,6 @@ const HomePage = () => {
       <Header categories={categories} />
       <CustomCarousel categories={categories} />
       <Description />
-      <Container></Container>
     </>
   );
 };

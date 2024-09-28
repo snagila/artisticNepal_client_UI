@@ -17,21 +17,30 @@ import CartPage from "./pages/cartPage/CartPage";
 import Checkout_Page from "./pages/checkoutPage/Checkout_Page";
 import WishList_Page from "./pages/wishListPage/WishList_Page";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getCategoriesAction } from "./redux/categoryRedux/categoryActions";
 import { getProductsAction } from "./redux/productRedux/productActions";
 import { getUserAction } from "./redux/userRedux/userActions";
 import { getWishListItems } from "./redux/wishListRedux/wishListActions";
 import PaymentSuccessPage from "./pages/paymentPage/PaymentSuccess";
+import Contact from "./pages/contactUs/Contact";
 
 function App() {
   const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.user);
+  console.log(user);
   useEffect(() => {
     dispatch(getCategoriesAction());
     dispatch(getProductsAction());
-    dispatch(getUserAction());
-    dispatch(getWishListItems());
   }, []);
+  useEffect(() => {
+    if (!sessionStorage.getItem("accessJWT")) {
+      return;
+    } else {
+      dispatch(getUserAction());
+      dispatch(getWishListItems());
+    }
+  }, [user._id]);
   return (
     <>
       <Routes>
@@ -39,6 +48,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/products/:id" element={<ProductOnCategory />} />
         <Route path="/products/product/:id" element={<ProductPage />} />
+        <Route path="/contact" element={<Contact />} />
 
         <Route element={<AuthLayout />}>
           <Route path="/user/login" element={<UserLogin />} />

@@ -22,7 +22,7 @@ const Description = () => {
             innovation.
           </span>
           <span style={{ borderBottom: "1px solid red", color: "red" }}>
-            DISCOVER
+            Please Check the menu to browse items
           </span>
         </div>
       </div>

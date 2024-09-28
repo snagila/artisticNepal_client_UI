@@ -99,9 +99,7 @@ const MyAccount = ({ user }) => {
                   {myAccountUSerInput.map((field, index) => (
                     <Col key={index} xs={index === 2 || index === 1 ? 6 : 12}>
                       <CustomInput
-                        handleOnChange={
-                          letUserUpdateDetails ? handleUserChange : ""
-                        }
+                        handleOnChange={handleUserChange}
                         label={field.label}
                         inputAttributes={{
                           name: field.name,
@@ -109,7 +107,7 @@ const MyAccount = ({ user }) => {
                           placeholder: field.placeholder,
                           required: field.required,
                           value: userFormData[field.name],
-                          disabled: field.disabled,
+                          disabled: field.disabled || !letUserUpdateDetails,
                         }}
                       />
                     </Col>

@@ -12,18 +12,31 @@ import { useSelector } from "react-redux";
 
 const Header = ({ categories }) => {
   const { user } = useSelector((state) => state.user);
+  const { cartItems } = useSelector((state) => state.cart);
+  const totalNumberOfItemsInCart = cartItems
+    ?.map((singleItem) => {
+      return singleItem.quantity;
+    })
+    .flat()
+    ?.reduce((acc, curr) => {
+      return acc + curr;
+    }, 0);
   const [headerHeight, setHeaderHeight] = useState("12vh");
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   useEffect(() => {
+    let timeoutId = null;
     const handleScroll = () => {
-      if (window.scrollY > 30) {
-        setHeaderHeight("5vh");
-      } else {
-        setHeaderHeight("12vh");
-      }
+      if (timeoutId) clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        if (window.scrollY > 40) {
+          setHeaderHeight("5vh");
+        } else {
+          setHeaderHeight("12vh");
+        }
+      }, 100); // Delay in ms
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -32,6 +45,7 @@ const Header = ({ categories }) => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
   return (
     <>
       <Row
@@ -55,7 +69,14 @@ const Header = ({ categories }) => {
           </Link>
 
           <Link className="withoutLink" to={"/user/cart"}>
-            <FaShoppingCart />
+            <div style={{ position: "relative", display: "inline-block" }}>
+              <FaShoppingCart />{" "}
+              {totalNumberOfItemsInCart > 0 && (
+                <span className="cart-quantity-badge">
+                  {totalNumberOfItemsInCart}
+                </span>
+              )}
+            </div>
           </Link>
 
           <GiHamburgerMenu onClick={handleShow} />

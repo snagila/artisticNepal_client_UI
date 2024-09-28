@@ -11,6 +11,7 @@ import { setIsLoading } from "../helperRedux/helperSlice";
 // get user user
 export const getUserAction = () => async (dispatch) => {
   if (!sessionStorage.getItem("accessJWT")) {
+    console.log("first");
     return;
   }
   const result = await getUser();
