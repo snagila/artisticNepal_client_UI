@@ -14,9 +14,6 @@ const PaymentSuccessPage = () => {
   const { user } = useSelector((state) => state.user);
 
   useEffect(() => {
-    dispatch(getCartItems());
-  }, []);
-  useEffect(() => {
     if (redirectStatus === "succeeded" && cartItems.length >= 1 && user._id) {
       const totalPrice = cartItems
         ?.map((singleItem) => {
@@ -26,7 +23,7 @@ const PaymentSuccessPage = () => {
         ?.reduce((acc, curr) => {
           return acc + curr;
         }, 0);
-      dispatch(placeOrderAction(cartItems, totalPrice, user._id));
+      dispatch(placeOrderAction(cartItems, totalPrice, user._id, user.address));
     }
   }, [redirectStatus, cartItems.length, user._id]);
   return (

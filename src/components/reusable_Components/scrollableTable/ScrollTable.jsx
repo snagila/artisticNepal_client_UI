@@ -15,10 +15,11 @@ const ScrollTable = ({ similarCategoryProducts }) => {
           <div className="table snaps-inline ">
             {similarCategoryProducts?.map((item, i) => (
               <Link
+                key={item._id}
                 to={`/products/product/${item.sku}`}
                 className="withoutLink  "
               >
-                <Card key={item._id} className="card-main-body">
+                <Card className="card-main-body">
                   <Card.Img
                     src={item?.thumbnail.map((image) => image)}
                     className="main-img"

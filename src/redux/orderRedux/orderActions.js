@@ -11,8 +11,8 @@ export const getUserOrderAction = (userId) => async (dispatch) => {
 };
 // place cart order
 export const placeOrderAction =
-  (cartItems, totalPrice, userId) => async (dispatch) => {
-    const result = await placeOrder(cartItems, totalPrice, userId);
+  (cartItems, totalPrice, userId, userAddress) => async (dispatch) => {
+    const result = await placeOrder(cartItems, totalPrice, userId, userAddress);
     console.log(result);
     if (result.status === "error") {
       toast.error(result.message);

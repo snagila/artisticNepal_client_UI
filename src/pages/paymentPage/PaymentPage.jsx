@@ -16,8 +16,16 @@ const API_BASE_URL = `${import.meta.env.VITE_APP_USER_API_URL}/api/stripe`;
 
 const PaymentPage = () => {
   const [clientSecret, setClientSecret] = useState("");
-  const { orders } = useSelector((state) => state.order);
-  console.log(orders);
+  const { cartItems } = useSelector((state) => state.cart);
+  console.log(cartItems);
+
+  const amountToPay = cartItems
+    ?.map((singleItem) => {
+      return +singleItem.price;
+    })
+    .reduce((acc, curr) => {
+      return acc + curr;
+    }, 0);
 
   const options = {
     // passing the client secret obtained from the server
@@ -30,7 +38,7 @@ const PaymentPage = () => {
   useEffect(() => {
     axios
       .post(`${API_BASE_URL}/create-payment-intent`, {
-        total: 15000, // send the payload required for calculating amount
+        total: amountToPay * 100, // send the payload required for calculating amount
       })
       .then((res) => setClientSecret(res.data.clientSecret))
       .catch((error) => {

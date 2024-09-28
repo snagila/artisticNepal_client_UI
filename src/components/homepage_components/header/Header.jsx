@@ -13,6 +13,7 @@ import { useSelector } from "react-redux";
 const Header = ({ categories }) => {
   const { user } = useSelector((state) => state.user);
   const { cartItems } = useSelector((state) => state.cart);
+  console.log(cartItems);
   const totalNumberOfItemsInCart = cartItems
     ?.map((singleItem) => {
       return singleItem.quantity;
@@ -36,7 +37,7 @@ const Header = ({ categories }) => {
         } else {
           setHeaderHeight("12vh");
         }
-      }, 100); // Delay in ms
+      }, 100);
     };
 
     window.addEventListener("scroll", handleScroll);

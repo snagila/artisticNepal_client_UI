@@ -73,7 +73,9 @@ const CartPage = () => {
                   <div>{user.email}</div>
                 </Col>
                 <Col>
-                  <Button variant="outline-primary">Update Details</Button>
+                  <Link to={"/user/dashboard"}>
+                    <Button variant="outline-primary">Update Details</Button>
+                  </Link>
                 </Col>
               </Row>
               <Row>

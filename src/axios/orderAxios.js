@@ -3,12 +3,18 @@ import axios from "axios";
 const ORDER_BASE_URL = `${import.meta.env.VITE_APP_USER_API_URL}/api/order`;
 
 // place order
-export const placeOrder = async (cartItems, totalPrice, userId) => {
+export const placeOrder = async (
+  cartItems,
+  totalPrice,
+  userId,
+  userAddress
+) => {
   try {
     const response = await axios.post(`${ORDER_BASE_URL}/order`, {
       cartItems,
       totalPrice,
       userId,
+      userAddress,
     });
     return response.data;
   } catch (error) {
