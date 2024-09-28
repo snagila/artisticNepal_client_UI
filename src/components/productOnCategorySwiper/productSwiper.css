@@ -1,14 +1,12 @@
-.mySwiper {
+.productpage {
   height: 20rem !important;
   width: 18rem !important;
 }
 
-.swiperimage {
-  display: block;
-  height: 20rem !important;
-  width: 18rem !important;
-  object-fit: cover;
-  border-radius: 6px;
+.productpage:hover .swiper-button-next,
+.productpage:hover .swiper-button-prev {
+  opacity: 1;
+  --swiper-navigation-size: 35px;
 }
 
 .swiper-button-prev,
@@ -20,8 +18,10 @@
   transition: opacity 0.3s ease;
 }
 
-.mySwiper:hover .swiper-button-next,
-.mySwiper:hover .swiper-button-prev {
-  opacity: 1;
-  --swiper-navigation-size: 35px;
+.swiperimage {
+  display: block;
+  height: 20rem !important;
+  width: 18rem !important;
+  object-fit: cover;
+  border-radius: 6px;
 }

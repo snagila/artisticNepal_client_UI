@@ -46,16 +46,20 @@ function HamburgerMenu({ show, handleClose }) {
         </div>
         <div className="custom-offcanvas-homepage h-25">
           <Stack className="p-3 " gap={2}>
-            <Stack
-              direction="horizontal"
-              gap={2}
-              className="align-items-center "
-            >
-              <div>
-                <BsPersonFill />
-              </div>
-              <div className="fw-bold">My Account</div>
-            </Stack>
+            <Link to={"/user/dashboard"} className="withoutLink">
+              {" "}
+              <Stack
+                direction="horizontal"
+                gap={2}
+                className="align-items-center "
+              >
+                <div>
+                  <BsPersonFill style={{ cursor: "pointer" }} />
+                </div>
+                <div className="fw-bold">My Account</div>
+              </Stack>
+            </Link>
+
             <Link className="withoutLink" to={"/contact"}>
               <Stack
                 direction="horizontal"

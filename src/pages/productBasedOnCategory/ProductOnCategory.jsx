@@ -19,6 +19,7 @@ const ProductOnCategory = () => {
   const sameCategoryProduct = products?.filter(
     (product) => product.category === id
   );
+  console.log(sameCategoryProduct);
 
   const handleSelectChange = (e) => {
     const value = e.target.value;
@@ -36,6 +37,9 @@ const ProductOnCategory = () => {
   useEffect(() => {
     setSortedProducts(sameCategoryProduct);
   }, [id]);
+  useEffect(() => {
+    setSortedProducts(sameCategoryProduct);
+  }, []);
   return (
     <>
       <Header />
@@ -65,7 +69,7 @@ const ProductOnCategory = () => {
         <div>
           <Container>
             <Row className="">
-              {sortedProducts?.map((product) => (
+              {(id ? sortedProducts : sameCategoryProduct)?.map((product) => (
                 <Col
                   className="mt-3 d-flex align-items-center justify-content-center "
                   key={product._id}
