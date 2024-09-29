@@ -19,7 +19,6 @@ const ProductOnCategory = () => {
   const sameCategoryProduct = products?.filter(
     (product) => product.category === id
   );
-  console.log(sameCategoryProduct);
 
   const handleSelectChange = (e) => {
     const value = e.target.value;
@@ -48,7 +47,7 @@ const ProductOnCategory = () => {
         <div className="p-1 " style={{ backgroundColor: "rgb(255, 252, 246)" }}>
           <Container>
             <Row className="">
-              <Col>
+              <Col className="text-nowrap">
                 <span className="fs-4 fw-bold">
                   {productCategory?.category}
                 </span>{" "}

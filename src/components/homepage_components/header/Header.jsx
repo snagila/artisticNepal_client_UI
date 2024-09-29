@@ -13,7 +13,7 @@ import { useSelector } from "react-redux";
 const Header = ({ categories }) => {
   const { user } = useSelector((state) => state.user);
   const { cartItems } = useSelector((state) => state.cart);
-  console.log(cartItems);
+
   const totalNumberOfItemsInCart = cartItems
     ?.map((singleItem) => {
       return singleItem.quantity;
@@ -22,6 +22,7 @@ const Header = ({ categories }) => {
     ?.reduce((acc, curr) => {
       return acc + curr;
     }, 0);
+
   const [headerHeight, setHeaderHeight] = useState("12vh");
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);

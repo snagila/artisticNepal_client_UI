@@ -2,7 +2,13 @@ import React from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import { FaMapMarkerAlt, FaPhone, FaEnvelope } from "react-icons/fa";
 import Header from "../../components/homepage_components/header/Header";
+import { toast } from "react-toastify";
+
 const Contact = () => {
+  const handleOnSubmit = (e) => {
+    e.preventDefault();
+    toast.success("Thank you for contacting. We will get back to you shortly.");
+  };
   return (
     <>
       <Header />
@@ -20,7 +26,7 @@ const Contact = () => {
         <Row className="mb-4 gap-1">
           <Col md={5}>
             <h2>Get in Touch</h2>
-            <Form>
+            <Form onSubmit={handleOnSubmit}>
               <Form.Group controlId="formName">
                 <Form.Label>Name</Form.Label>
                 <Form.Control type="text" placeholder="Enter your name" />

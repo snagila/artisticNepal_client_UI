@@ -28,7 +28,6 @@ import Contact from "./pages/contactUs/Contact";
 function App() {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
-  console.log(user);
   useEffect(() => {
     dispatch(getCategoriesAction());
     dispatch(getProductsAction());
