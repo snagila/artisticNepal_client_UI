@@ -1,35 +1,43 @@
 import React from "react";
 import "./scrollTable.css";
-import { Button, Card, Col, Image, Row } from "react-bootstrap";
+import { Badge, Card, Col, Image, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-const ScrollTable = ({ similarCategoryProducts }) => {
+const ScrollTable = ({ products }) => {
   return (
     <>
-      <Row>
-        <h3 className=" p-2 " style={{}}>
-          Similar Products
-        </h3>
-
+      <Row className="">
         <Col>
           <div className="table snaps-inline ">
-            {similarCategoryProducts?.map((item, i) => (
+            {products?.map((item, i) => (
               <Link
                 key={item._id}
                 to={`/products/product/${item.sku}`}
                 className="withoutLink  "
               >
-                <Card className="card-main-body">
-                  <Card.Img
+                <Card className="card-main-body position-relative">
+                  <Image
                     src={item?.thumbnail.map((image) => image)}
-                    className="main-img"
+                    className="main-img p-0 rounded"
                   />
 
-                  <Card.Title className="p-1 ms-1 bg-transparent ">
-                    {item.name}
-                  </Card.Title>
+                  {/* On Sale Badge */}
+                  {item.salesPrice && (
+                    <Badge
+                      className="bg-danger position-absolute top-0 end-0 p-2 m-1"
+                      style={{ zIndex: 1 }}
+                    >
+                      {(
+                        ((item.price - item.salesPrice) / item.price) *
+                        100
+                      ).toFixed(2)}
+                      % off
+                    </Badge>
+                  )}
 
-                  {/* <Button className="w-100">View</Button> */}
+                  <div className="p-0 ps-1 fw-bold bg-transparent text-nowrap overflow-hidden">
+                    {item.name}
+                  </div>
                 </Card>
               </Link>
             ))}

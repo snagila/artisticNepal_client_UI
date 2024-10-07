@@ -207,8 +207,9 @@ const ProductPage = () => {
             )}
           </span>
         </Row>
-        <Row className="mt-4">
-          <ScrollTable similarCategoryProducts={similarCategoryProducts} />
+        <Row className="m-auto mt-4">
+          <h3 className=" p-auto ">Similar Products</h3>
+          <ScrollTable products={similarCategoryProducts} />
         </Row>
       </Container>
     </>

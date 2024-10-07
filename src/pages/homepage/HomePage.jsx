@@ -3,11 +3,11 @@ import CustomCarousel from "../../components/homepage_components/carousel/Carous
 import Description from "../../components/homepage_components/nepaliArt_description/Description";
 import { useSelector } from "react-redux";
 import ProductCard from "../../components/reusable_Components/productCard/ProductCard";
+import ProductOnSale from "../../components/homepage_components/ProductOnSale";
 
 const HomePage = () => {
   const { categories } = useSelector((state) => state.category);
   const { orders } = useSelector((state) => state.order);
-  console.log(orders);
 
   return (
     <>
@@ -16,7 +16,8 @@ const HomePage = () => {
       <CustomCarousel categories={categories} />
       <Description />
       {/* Top selling product */}
-      {orders.map((order) => console.log(order))}
+      <ProductOnSale />
+      {/* {orders.map((order) => console.log(order))} */}
       {/* <ProductCard /> */}
     </>
   );

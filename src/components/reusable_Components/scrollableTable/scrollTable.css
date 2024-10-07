@@ -3,13 +3,10 @@
   grid-auto-flow: column;
   grid-column-start: auto;
   overflow-x: scroll;
-
-  padding: 5px;
-  background: #fffcf6;
   gap: 1rem;
 }
 .table::-webkit-scrollbar {
-  display: none;
+  display: auto;
 }
 .snaps-inline {
   scroll-snap-type: inline mandatory;
@@ -27,7 +24,8 @@
 
 .main-img {
   width: 100%;
-  height: 80%;
+  height: 90%;
+  object-fit: cover;
 }
 
 @media (max-width: 768px) {
