@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Header from "../../components/homepage_components/header/Header";
-import { Card, Col, Container, Form, Row } from "react-bootstrap";
+import { Badge, Card, Col, Container, Form, Row } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ProductSwiper from "../../components/productOnCategorySwiper/ProductSwiper";
@@ -79,6 +79,7 @@ const ProductOnCategory = () => {
                       backgroundColor: "rgb(245,239,232)",
                       border: "none",
                     }}
+                    className="position-relative"
                   >
                     <Link to={`/products/product/${product.sku}`}>
                       <ProductSwiper
@@ -86,9 +87,38 @@ const ProductOnCategory = () => {
                         swiperFrom={"productOnCategory"}
                       />
                     </Link>
+                    {/* On Sale Badge */}
+                    {product.salesPrice && (
+                      <Badge
+                        className="bg-danger position-absolute top-0 end-0 p-2 m-1"
+                        style={{ zIndex: 1 }}
+                      >
+                        {(
+                          ((product.price - product.salesPrice) /
+                            product.price) *
+                          100
+                        ).toFixed(2)}
+                        % off
+                      </Badge>
+                    )}
 
                     <Card.Body>
-                      <Card.Title>{product.name}</Card.Title>
+                      <Card.Title className="d-flex justify-content-between w-100">
+                        <div>{product.name}</div>
+                        <div>
+                          {product.salesPrice ? (
+                            <span className="text-danger">
+                              ${product.salesPrice}
+                            </span>
+                          ) : (
+                            <span className="text-secondary">
+                              {" "}
+                              ${product.price}
+                            </span>
+                          )}
+                        </div>
+                        <span className="text-secondary"></span>
+                      </Card.Title>
                     </Card.Body>
                   </Card>
                 </Col>

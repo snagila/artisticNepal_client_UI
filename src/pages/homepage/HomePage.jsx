@@ -14,9 +14,10 @@ const HomePage = () => {
       {" "}
       <Header categories={categories} />
       <CustomCarousel categories={categories} />
+      <div></div>
+      <ProductOnSale />
       <Description />
       {/* Top selling product */}
-      <ProductOnSale />
       {/* {orders.map((order) => console.log(order))} */}
       {/* <ProductCard /> */}
     </>

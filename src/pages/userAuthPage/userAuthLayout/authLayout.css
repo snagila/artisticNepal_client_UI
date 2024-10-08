@@ -39,26 +39,6 @@
     display: none;
   }
 
-  /* #authlayoutCol1title1 {
-    position: absolute;
-    top: 20%;
-    left: 30%;
-    writing-mode: horizontal-tb;
-    text-orientation: upright;
-    font-size: 2rem;
-    font-weight: bold;
-    white-space: nowrap;
-  }
-  #authlayoutCol1title2 {
-    position: absolute;
-    top: 60%;
-    left: 35%;
-    writing-mode: horizontal-tb;
-    text-orientation: upright;
-    font-size: 2rem;
-    font-weight: bold;
-    white-space: nowrap;
-  } */
   #authlayoutCol2 {
     height: 100vh;
   }

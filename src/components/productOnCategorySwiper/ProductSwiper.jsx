@@ -1,6 +1,6 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, EffectFade, Pagination } from "swiper/modules";
+import { Navigation, EffectFade } from "swiper/modules";
 import "swiper/css/bundle";
 import "./productSwiper.css";
 import "swiper/css/effect-fade";

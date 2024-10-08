@@ -34,7 +34,7 @@ const Header = ({ categories }) => {
       if (timeoutId) clearTimeout(timeoutId);
       timeoutId = setTimeout(() => {
         if (window.scrollY > 40) {
-          setHeaderHeight("5vh");
+          setHeaderHeight("8vh");
         } else {
           setHeaderHeight("12vh");
         }
@@ -51,42 +51,60 @@ const Header = ({ categories }) => {
   return (
     <>
       <Row
-        className=" header  overflow-x-hidden shadow"
+        className=" header  overflow-hidden shadow d-flex align-items-center justify-content-between"
         style={{ height: headerHeight, transition: "height 0.3s ease" }}
       >
-        <Col className="d-flex align-items-center fw-bold fs-3 ms-4">
-          <Link to="/" className="withoutLink">
+        <Col xs={4}>
+          <div className="ps-4">
             {" "}
-            Artistic Nepal
-          </Link>{" "}
+            <GiHamburgerMenu onClick={handleShow} size={30} />
+            <HamburgerMenu
+              show={show}
+              handleClose={handleClose}
+              categories={categories}
+            />
+          </div>
+        </Col>
+        <Col className="d-flex justify-content-center  " xs={4}>
+          <div
+            className="d-flex justify-content-center align-items-center  text-nowrap"
+            style={{
+              fontSize: headerHeight === "8vh" ? "3rem" : "4rem",
+              transition: "font-size 0.3s ease",
+            }}
+          >
+            <Link to="/" className="withoutLink qwitcher-grypen-bold ">
+              Artistic Nepal
+            </Link>{" "}
+          </div>
         </Col>
 
-        <Col className="d-flex align-items-center justify-content-evenly gap-2">
-          <Link to={"/user/wishlist"} className="withoutLink">
-            <FaHeart />
-          </Link>
-
-          <Link to={`/user/login`} className="withoutLink">
-            {user?._id ? <FaUserCheck color="red" /> : <FaRegUser />}
-          </Link>
-
-          <Link className="withoutLink" to={"/user/cart"}>
-            <div style={{ position: "relative", display: "inline-block" }}>
-              <FaShoppingCart />{" "}
-              {totalNumberOfItemsInCart > 0 && (
-                <span className="cart-quantity-badge">
-                  {totalNumberOfItemsInCart}
-                </span>
-              )}
+        <Col className=" " xs={4}>
+          <div className="d-flex align-items-center justify-content-end gap-3 pe-4 threemenuCol">
+            <div>
+              <Link to={"/user/wishlist"} className="withoutLink">
+                <FaHeart />
+              </Link>
             </div>
-          </Link>
-
-          <GiHamburgerMenu onClick={handleShow} />
-          <HamburgerMenu
-            show={show}
-            handleClose={handleClose}
-            categories={categories}
-          />
+            <div>
+              {" "}
+              <Link to={`/user/login`} className="withoutLink">
+                {user?._id ? <FaUserCheck color="red" /> : <FaRegUser />}
+              </Link>
+            </div>
+            <div>
+              <Link className="withoutLink" to={"/user/cart"}>
+                <div style={{ position: "relative", display: "inline-block" }}>
+                  <FaShoppingCart />{" "}
+                  {totalNumberOfItemsInCart > 0 && (
+                    <span className="cart-quantity-badge">
+                      {totalNumberOfItemsInCart}
+                    </span>
+                  )}
+                </div>
+              </Link>
+            </div>
+          </div>
         </Col>
       </Row>
     </>

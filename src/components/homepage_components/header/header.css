@@ -1,7 +1,12 @@
+/* google Qwitcher Grypen font */
+@import url("https://fonts.googleapis.com/css2?family=Qwitcher+Grypen:wght@400;700&display=swap");
+.qwitcher-grypen-bold {
+  font-family: "Qwitcher Grypen", cursive;
+  font-weight: 700;
+  font-style: normal;
+}
+
 .header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   background-color: rgba(245, 239, 232);
   position: sticky;
   top: 0;
@@ -10,10 +15,8 @@
 
 .cart-quantity-badge {
   position: absolute;
-
   right: -16px;
   bottom: 12px;
-
   background-color: red;
   color: white;
   border-radius: 50%;
@@ -26,4 +29,16 @@
   width: 15px;
   height: 15px;
   line-height: 20px;
+}
+
+@media only screen and (max-width: 576px) {
+  .qwitcher-grypen-bold {
+    font-size: 2rem;
+  }
+
+  .threemenuCol {
+    padding-right: 10px !important;
+    font-size: 15px !important;
+    gap: 10px !important;
+  }
 }

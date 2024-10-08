@@ -5,6 +5,7 @@ import { getAProductAction } from "../../redux/productRedux/productActions";
 import { useDispatch, useSelector } from "react-redux";
 import Header from "../../components/homepage_components/header/Header";
 import {
+  Badge,
   Button,
   Col,
   Container,
@@ -115,11 +116,24 @@ const ProductPage = () => {
             </Col>
           </Col>
 
-          <Col className="mainProductImageCol " xs={12} md={6}>
+          <Col className="mainProductImageCol position-relative" xs={12} md={6}>
             <Image
               src={productPicDisplay}
               style={{ height: "100%", width: "100%" }}
             />
+            {/* On Sale Badge */}
+            {product.salesPrice && (
+              <Badge
+                className="bg-danger position-absolute top-0 end-0 p-2 me-3 mt-1"
+                style={{ zIndex: 1 }}
+              >
+                {(
+                  ((product.price - product.salesPrice) / product.price) *
+                  100
+                ).toFixed(2)}
+                % off
+              </Badge>
+            )}
           </Col>
 
           <Col className="productDescriptionCol " xs={12} md={5}>
@@ -128,8 +142,17 @@ const ProductPage = () => {
                 <h3 className="p-0">{product.name}</h3>
               </Row>
               <Row className="fw-bold fs-4 " style={{ color: "#696969" }}>
-                {" "}
-                $ {product.price}
+                <div>
+                  ${" "}
+                  <span
+                    className={
+                      product.salesPrice ? "text-decoration-line-through" : ""
+                    }
+                  >
+                    {product.price}
+                  </span>
+                  <span className="text-danger"> {product.salesPrice}</span>
+                </div>
               </Row>
 
               <Row>Reviews:</Row>
@@ -152,6 +175,7 @@ const ProductPage = () => {
                     </Form.Select>
                   </Col>
                 </Row>
+
                 <Col className="p-0 ">
                   <Button
                     className="w-100 "

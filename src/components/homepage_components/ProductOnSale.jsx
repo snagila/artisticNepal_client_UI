@@ -1,11 +1,12 @@
 import React, { useMemo } from "react";
 import { useSelector } from "react-redux";
 import ScrollTable from "../reusable_Components/scrollableTable/ScrollTable";
-import { Button, Row } from "react-bootstrap";
+import { Row } from "react-bootstrap";
 
 const ProductOnSale = () => {
   const { products } = useSelector((state) => state.product);
   const currentDate = Date.now();
+  //   console.log(products);
   const onSaleProducts = useMemo(
     () =>
       products.filter((product) => {
@@ -15,17 +16,11 @@ const ProductOnSale = () => {
       }),
     [products, currentDate]
   );
-  console.log(onSaleProducts);
+
   return (
     <>
-      <Row className="px-2 m-auto">
-        <div className="d-flex justify-content-between align-items-center">
-          <h3 className=" p-auto ">On Sale</h3>
-          <Button size="sm" variant="outline-danger">
-            View All Sale
-          </Button>
-        </div>
-
+      <Row className="p-4">
+        <h3 className=" p-auto ">On Sale </h3>
         <ScrollTable products={onSaleProducts} />
       </Row>
     </>
