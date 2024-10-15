@@ -19,7 +19,7 @@ function HamburgerMenu({ show, handleClose }) {
       <Offcanvas
         show={show}
         onHide={handleClose}
-        placement="end"
+        placement="start"
         keyboard={true}
         className="hamBurgerOffcanvas"
       >
