@@ -1,22 +1,27 @@
 import Carousel from "react-bootstrap/Carousel";
-import { Button } from "react-bootstrap";
+import { Button, Image } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 const CustomCarousel = ({ categories }) => {
   return (
-    <Carousel fade style={{ height: "60vh" }}>
+    <Carousel fade style={{ height: "88vh" }}>
       {categories.map((item) => (
         <Carousel.Item key={item._id}>
-          <img
-            src={item.categoryThumbnail}
-            className="d-block w-100"
-            alt=""
+          <div
             style={{
-              height: "60vh",
-              inlineSize: "100%",
-              objectFit: "cover",
+              width: "100%",
+              height: "88vh",
+              overflow: "hidden",
             }}
-          />
+          >
+            <Image
+              src={item.categoryThumbnail}
+              className="img-fluid"
+              style={{ objectFit: "cover", width: "100%", height: "100%" }}
+              alt={item.category}
+            />
+          </div>
+
           <Carousel.Caption
             style={{
               boxShadow: "0 4px 8px rgba(0, 0, 0, 0.6)",

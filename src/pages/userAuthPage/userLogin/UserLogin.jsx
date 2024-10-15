@@ -11,7 +11,7 @@ const UserLogin = () => {
   };
   return (
     <>
-      <div className="authFormCentering">
+      <div className="authFormCentering loginFormDiv">
         <Row>
           <UserLoginForm initialFormData={initialFormData} />
         </Row>

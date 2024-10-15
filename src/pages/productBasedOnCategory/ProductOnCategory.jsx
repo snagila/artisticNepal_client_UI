@@ -35,10 +35,8 @@ const ProductOnCategory = () => {
 
   useEffect(() => {
     setSortedProducts(sameCategoryProduct);
-  }, [id]);
-  useEffect(() => {
-    setSortedProducts(sameCategoryProduct);
-  }, []);
+  }, [id, products, categories]);
+
   return (
     <>
       <Header />

@@ -38,7 +38,7 @@ const Header = ({ categories }) => {
         } else {
           setHeaderHeight("12vh");
         }
-      }, 100);
+      });
     };
 
     window.addEventListener("scroll", handleScroll);
