@@ -20,7 +20,6 @@ const HomePage = () => {
       {/* Top selling product */}
       {/* {orders.map((order) => console.log(order))} */}
       {/* <ProductCard /> */}
-      <Description />
     </>
   );
 };

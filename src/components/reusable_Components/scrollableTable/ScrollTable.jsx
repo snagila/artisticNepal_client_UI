@@ -22,7 +22,7 @@ const ScrollTable = ({ products }) => {
                   />
 
                   {/* On Sale Badge */}
-                  {item.salesPrice && (
+                  {item.salesPrice && item.quantity > 1 && (
                     <Badge
                       className="bg-danger position-absolute top-0 end-0 p-2 m-1"
                       style={{ zIndex: 1 }}
@@ -32,6 +32,14 @@ const ScrollTable = ({ products }) => {
                         100
                       ).toFixed(2)}
                       % off
+                    </Badge>
+                  )}
+                  {item.quantity < 1 && (
+                    <Badge
+                      className="bg-danger position-absolute top-0 end-0 p-2 me-3 mt-1"
+                      style={{ zIndex: 1 }}
+                    >
+                      Sold Out
                     </Badge>
                   )}
 

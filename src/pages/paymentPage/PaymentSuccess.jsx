@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { Link, useSearchParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,9 +12,17 @@ const PaymentSuccessPage = () => {
   const redirectStatus = searchParams.get("redirect_status");
   const { cartItems } = useSelector((state) => state.cart);
   const { user } = useSelector((state) => state.user);
+  const hasPlacedOrder = useRef(false);
+  console.log(cartItems);
+  console.log(redirectStatus);
 
   useEffect(() => {
-    if (redirectStatus === "succeeded" && cartItems.length >= 1 && user._id) {
+    if (
+      redirectStatus === "succeeded" &&
+      cartItems?.length > 0 &&
+      user &&
+      !hasPlacedOrder.current
+    ) {
       const totalPrice = cartItems
         ?.map((singleItem) => {
           return singleItem.totalPrice;
@@ -24,8 +32,9 @@ const PaymentSuccessPage = () => {
           return acc + curr;
         }, 0);
       dispatch(placeOrderAction(cartItems, totalPrice, user._id, user.address));
+      hasPlacedOrder.current = true;
     }
-  }, [redirectStatus, cartItems.length, user._id]);
+  }, [redirectStatus, cartItems, user]);
   return (
     <>
       <Header />

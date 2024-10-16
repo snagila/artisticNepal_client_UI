@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "../../components/homepage_components/header/Header";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Card, Col, Container, Row } from "react-bootstrap";
+import { Badge, Button, Card, Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import {
   addWishlistitemsToCartAction,
@@ -56,29 +56,36 @@ const WishList_Page = () => {
             <Row className="mt-3  d-flex justify-content-center fs-3 fst-italic">
               WishList
             </Row>
-            <Row>
+            <Row className="">
               {wishList.map((item) => (
-                <Col
-                  className="mt-3  d-flex justify-content-center"
-                  key={item._id}
-                  xs={6}
-                  md={3}
-                >
+                <Col className="mt-5" key={item._id} xs={6} md={3}>
                   <Card
                     style={{
                       backgroundColor: "rgb(245,239,232)",
                       border: "none",
                     }}
                   >
-                    <div className="d-flex flex-column align-items-between justify-content-between">
+                    <div className="d-flex flex-column align-items-between justify-content-between position-relative">
                       <Row>
-                        {" "}
                         <Link to={`/products/product/${item.sku}`}>
                           <Card.Img
                             variant="top"
-                            style={{ height: "15rem" }}
+                            style={{
+                              height: "15rem",
+                              width: "100%",
+                              objectFit: "cover",
+                              borderRadius: "8px",
+                            }}
                             src={item.thumbnail?.map((item) => item)}
                           />
+                          {item.availableQuantity < 1 && (
+                            <Badge
+                              className="bg-danger position-absolute top-0 end-0 p-2 me-3 mt-1"
+                              style={{ zIndex: 1 }}
+                            >
+                              Sold Out
+                            </Badge>
+                          )}
                         </Link>
                       </Row>
                       <Row>
@@ -88,13 +95,15 @@ const WishList_Page = () => {
                               {item.name}
                             </Card.Title>
                           </Row>
-                          <Row>
-                            <Col className="p-0">
+                          <Row className="gap-1">
+                            <Col xs={12} md={5}>
                               <Button
                                 variant="outline-secondary"
                                 className="w-100"
                                 onClick={() => handleAddToCart(item)}
-                                disabled={isLoading}
+                                disabled={
+                                  isLoading || item.availableQuantity < 1
+                                }
                               >
                                 Add to cart
                               </Button>

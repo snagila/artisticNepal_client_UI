@@ -17,7 +17,6 @@ const API_BASE_URL = `${import.meta.env.VITE_APP_USER_API_URL}/api/stripe`;
 const PaymentPage = () => {
   const [clientSecret, setClientSecret] = useState("");
   const { cartItems } = useSelector((state) => state.cart);
-  console.log(cartItems);
 
   const amountToPay = cartItems
     ?.map((singleItem) => {
@@ -44,7 +43,7 @@ const PaymentPage = () => {
       .catch((error) => {
         console.log("ERROR", error);
       });
-  }, []);
+  }, [cartItems]);
 
   return (
     <>

@@ -23,6 +23,7 @@ import { addWishListActions } from "../../redux/wishListRedux/wishListActions";
 const ProductPage = () => {
   const { isLoading } = useSelector((state) => state.helper);
   const { product, products } = useSelector((state) => state.product);
+  console.log(product);
 
   const [productPicDisplay, setProductPicDisplay] = useState("");
   const [selectedQuantity, setSelectedQuantity] = useState("1");
@@ -122,7 +123,7 @@ const ProductPage = () => {
               style={{ height: "100%", width: "100%" }}
             />
             {/* On Sale Badge */}
-            {product.salesPrice && (
+            {product.salesPrice && product.quantity > 1 && (
               <Badge
                 className="bg-danger position-absolute top-0 end-0 p-2 me-3 mt-1"
                 style={{ zIndex: 1 }}
@@ -132,6 +133,14 @@ const ProductPage = () => {
                   100
                 ).toFixed(2)}
                 % off
+              </Badge>
+            )}
+            {product.quantity < 1 && (
+              <Badge
+                className="bg-danger position-absolute top-0 end-0 p-2 me-3 mt-1"
+                style={{ zIndex: 1 }}
+              >
+                Sold Out
               </Badge>
             )}
           </Col>
@@ -183,7 +192,7 @@ const ProductPage = () => {
                     onClick={() =>
                       handleAddItemToTheCart(selectedQuantity, product)
                     }
-                    disabled={isLoading}
+                    disabled={isLoading || product.quantity < 1}
                   >
                     {isLoading ? (
                       <Spinner animation="border" size="sm" />

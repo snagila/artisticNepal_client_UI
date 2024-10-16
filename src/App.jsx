@@ -24,6 +24,7 @@ import { getUserAction } from "./redux/userRedux/userActions";
 import { getWishListItems } from "./redux/wishListRedux/wishListActions";
 import PaymentSuccessPage from "./pages/paymentPage/PaymentSuccess";
 import Contact from "./pages/contactUs/Contact";
+import { getCartItems } from "./redux/cartItemRedux/cartItemsActions";
 
 function App() {
   const dispatch = useDispatch();
@@ -38,6 +39,7 @@ function App() {
     } else {
       dispatch(getUserAction());
       dispatch(getWishListItems());
+      dispatch(getCartItems());
     }
   }, [user._id]);
   return (

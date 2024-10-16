@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 
 const ProductCategory = () => {
   const { categories } = useSelector((state) => state.category);
-  console.log(categories);
   return (
     <>
       <Row className="justify-content-evenly gap-2 p-2">

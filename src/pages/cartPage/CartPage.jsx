@@ -3,7 +3,6 @@ import "./cartPage.css";
 import Header from "../../components/homepage_components/header/Header";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { getCartItems } from "../../redux/cartItemRedux/cartItemsActions";
 import CartPage_Col1_cartItems from "../../components/cartPage_components/CartPage_Col1_cartItems";
 import CartPage_Col2_payment from "../../components/cartPage_components/CartPage_Col2_payment";
 import { Link } from "react-router-dom";
@@ -21,12 +20,6 @@ const CartPage = () => {
     ?.reduce((acc, curr) => {
       return acc + curr;
     }, 0);
-
-  useEffect(() => {
-    if (user?._id) {
-      dispatch(getCartItems());
-    }
-  }, [user]);
 
   return (
     <>

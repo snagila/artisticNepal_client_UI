@@ -33,7 +33,7 @@ const Header = ({ categories }) => {
     const handleScroll = () => {
       if (timeoutId) clearTimeout(timeoutId);
       timeoutId = setTimeout(() => {
-        if (window.scrollY > 40) {
+        if (window.scrollY > 4) {
           setHeaderHeight("8vh");
         } else {
           setHeaderHeight("12vh");

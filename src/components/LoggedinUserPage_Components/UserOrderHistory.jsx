@@ -3,6 +3,7 @@ import "./loggedinUserPage.css";
 import { Button, Col, Container, Image, Row } from "react-bootstrap";
 import OrderedItems from "./OrderedItems";
 import { FaPlus } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const UserOrderHistory = ({ orders }) => {
   const [openIndex, setOpenIndex] = useState([]);
@@ -74,7 +75,12 @@ const UserOrderHistory = ({ orders }) => {
                     <Col id="historyImagesdiv">
                       {item.orderItems.map((singleitem) => {
                         return singleitem.thumbnail.map((image) => {
-                          return <Image id="orderHistoryImage" src={image} />;
+                          return (
+                            <Link to={`/products/product/${singleitem.sku}`}>
+                              {" "}
+                              <Image id="orderHistoryImage" src={image} />
+                            </Link>
+                          );
                         });
                       })}
                     </Col>
