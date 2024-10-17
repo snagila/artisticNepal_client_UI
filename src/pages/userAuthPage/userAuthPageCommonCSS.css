@@ -8,7 +8,6 @@
 
 @media (max-width: 500px) {
   .authFormCentering {
-    height: 50vh;
     margin: none;
   }
   .loginFormDiv {

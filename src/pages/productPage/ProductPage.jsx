@@ -164,7 +164,7 @@ const ProductPage = () => {
                 </div>
               </Row>
 
-              <Row>Reviews:</Row>
+              {/* <Row>Reviews:</Row> */}
 
               <Row className="mt-2">
                 <Row className="mb-2">

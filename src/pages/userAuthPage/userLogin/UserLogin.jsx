@@ -1,6 +1,6 @@
 import React from "react";
 import "../userAuthPageCommonCSS.css";
-import { Row } from "react-bootstrap";
+import { Alert, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import UserLoginForm from "../../../components/userPage-Components/userLogin/UserLoginForm";
 
@@ -12,6 +12,16 @@ const UserLogin = () => {
   return (
     <>
       <div className="authFormCentering loginFormDiv">
+        <Alert>
+          This project is deployed using free hosting services, which allowed me
+          to explore and implement various technologies without incurring costs.
+          Please be patient.
+        </Alert>
+        <Alert variant="danger">
+          Great amount of time have been spent adding datas please do not abuse
+          it.
+        </Alert>
+        <Alert variant="info">The placeholder is login details.</Alert>
         <Row>
           <UserLoginForm initialFormData={initialFormData} />
         </Row>
