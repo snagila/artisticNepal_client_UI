@@ -7,7 +7,6 @@ import ProductCategory from "../../components/homepage_components/ProductCategor
 
 const HomePage = () => {
   const { categories } = useSelector((state) => state.category);
-  const { orders } = useSelector((state) => state.order);
 
   return (
     <>
